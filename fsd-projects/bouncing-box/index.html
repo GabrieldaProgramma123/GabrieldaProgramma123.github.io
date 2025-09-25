@@ -72,6 +72,8 @@
             var positionX = 0;
             var points = 0;
             var speed = 10;
+            var health = 100;
+            var relHealth;
 
 
 
@@ -82,14 +84,21 @@
          * If the box drifts off the screen, turn it around!
          */
         function update() {
+            relHealth = Math.pow(1.2567, points)
             positionX += speed;
             moveBoxTo(positionX);
             if (positionX > boardWidth) {
               speed *= -1;
+              if (points > 1000) {
+              health -= Math.floor(relHealth);
+              } else {
+                health -= 3;
+              }
             }
             if (positionX < 0) {
               speed *= -1;
             }
+            changeBoxText(`${points} ${health}`);
         
 
           
@@ -105,8 +114,9 @@
         function handleBoxClick() {
           positionX = 0;
           points++;
-          changeBoxText(points);
-          speed = 3 * points + 10;
+          health += Math.floor(points / 3);
+          changeBoxText(`${points} ${health}`);
+          speed = 1.01 * points + 10;
 
 
 
