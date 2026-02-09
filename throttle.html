@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throttle Fun: An excellent video game website</title>
+    <link rel="stylesheet" href="fun.css">
+</head>
+<body>
+    <h1>WELCOME TO: </h1>
+    <h1 class="enjoy">THROTTLE.FUN</h1>
+    <p>Throttle.Fun is a website that is filled with activities that are sure to keep you entertained.</p>
+    
+    <h1>VIDEO GAME</h1>
+    <button onclick="pressKey()">ClickMe</button>
+    <p id="key"></p>
+    <button onclick="beginGame()">PLAY GAME</button>
+    <button onclick="checkScore()">LOSE OR WIN</button>
+    <button onclick="displayScore()">CKECK SCORE</button>
+    <p id="score"></p>
+    <h1>JUICY JOKE JENERATOR</h1>
+    <button onclick="funTime()">Click for Quality Comedy!</button>
+    <button onclick="console.log(jokes)">SHOW ALL JOKES</button>
+    <script src="game.js"></script>
+    <h1>PAINT DRYING SIMULATOR: IS THE PAINT DRY?</h1>
+    <button onclick="checkDry()">Find out!</button>
+    <h1>DICE ROLLER</h1>
+    <p id="dicetwenty"></p>
+    <button onclick="document.getElementById('dicetwenty').innerHTML = getRndInteger(1, 20)">d20</button>
+    <p id="dicetwelve"></p>
+    <button onclick="document.getElementById('dicetwelve').innerHTML = getRndInteger(1, 12)">d12</button>
+    <p id="diceten"></p>
+    <button onclick="document.getElementById('diceten').innerHTML = getRndInteger(0, 9)">d10</button>
+    <p id="diceeight"></p>
+    <button onclick="document.getElementById('diceeight').innerHTML = getRndInteger(1, 8)">d8</button>
+    <p id="dicesix"></p>
+    <button onclick="document.getElementById('dicesix').innerHTML = getRndInteger(1, 6)">d6</button>
+    <p id="dicefour"></p>
+    <button onclick="document.getElementById('dicefour').innerHTML = getRndInteger(1, 4)">d4</button>
+    <p id="dicetwo"></p>
+    <button onclick="document.getElementById('dicetwo').innerHTML = getRndInteger(1, 2)">Coin Flip</button>
+</body>
+</html>

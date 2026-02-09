@@ -1,0 +1,19 @@
+body {
+    background-color: black;
+} h1 {
+    color: white;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 400%;
+} .enjoy {
+    color: white;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 1000%;
+} p {
+    color: white;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+} button {
+    color: black;
+    background-color: white;
+    border-color: white;
+    border-width: 5px;
+}
