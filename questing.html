@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questing Online</title>
+    <link rel="stylesheet" href="questing.css">
+    <script src="questing.js"></script>
+</head>
+<body>
+    <div>
+<button onclick="moveRight()" class="items">RIGHT<br>RIGHT</button>
+<br>
+<br>
+<button onclick="moveLeft()" class="items">LEFT<br>LEFT</button>
+<br>
+<br>
+<button onclick="moveUp()" class="items">UP<br>UP</button>
+<br>
+<br>
+<button onclick="moveDown()" class="items">DOWN<br>DOWN</button>
+<br>
+<br>
+<button onclick="saveProgress()" class="items">SAVE</button>
+<br>
+<button onclick="loadSave()" class="items">LOAD</button>
+<br>
+<button onclick="interact()" class="items">ATTACK<br>ATTACK</button>
+<br>
+<br>
+<button onclick="openInv()" class="items">open inventory</button>
+<br>
+<button onclick="window.location.href='index.html'" class="items">back to main page</button>
+<br>
+<div id="money" class="items"></div>
+<br>
+<br>
+<div class="items" id="points"></div>
+<br>
+<div class="items" id="healthy"></div>
+<br>
+<div class="items" id="time"></div>
+<br>
+<br>
+<div class="items" id="loaned"></div>  
+<div class="lilMenu">Car:<br> 50,000 coins<br>Health Potion:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!</div>
+<br>
+</div>
+<div class="tallDiv" id="dayNight"></div>
+<button id="main" class="thing" onclick="tickle()">0</button>
+<div class="shop" id="buy"><br>CAR 4 SALE<br>SHOP SWORDS</div>
+<div class="buzz" id="work"><button id="subbing" onclick="sub()" class="items2">WORK</button><br>WORK: Business BlahBlah</div>
+<div class="house1" id="home1"><br><br><br>HOUSE</div>
+<div class="house2" id="home2">HOME</div>
+<div class="caveMark"><br><br><br><br><br>CAVE CAVE HERE</div>
+<div class="houseMark"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>BACK|O|BACK</div>
+<div class="bed">bed</div>
+<div class="table">table</div>
+<div class="caveEnter" id="danger">dark cave</div>
+</body>
+</html>

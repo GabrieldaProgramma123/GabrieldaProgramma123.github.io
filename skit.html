@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Historia de Beth y el Hada</title>
+    
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="skit.css">
+</head>
+<body>
+
+<div id="game-container">
+    <!-- Back Navigation -->
+    <a href="index.html" id="back-btn">&larr;Back</a>
+    
+    <!-- Animation Stage -->
+    <canvas id="canvas"></canvas>
+    
+    <!-- User Interface Layer -->
+    <div id="ui-layer">
+        <div id="speaker-name">...</div>
+        <div id="dialogue-text">Click THE BIG RED to begin...</div>
+        <button id="next-btn" onclick="advanceStory()">THE BIG RED &rarr;</button>
+    </div>
+</div>
+
+<script>
+/**
+ * STORY DATA & GAME LOGIC
+ */
+const script = [
+    { type: "scene", bg: "bedroom" },
+    { speaker: "Beth", text: "¿Dónde está mi hada?", action: "beth_enter" },
+    { speaker: "Narrator", text: "(Beth walks into her brother’s room.)" },
+    { speaker: "Beth", text: "¿Has visto a mi hada?" },
+    { speaker: "Nick", text: "No creo en los hadas." },
+    { speaker: "Beth", text: "¿Por que?" },
+    { speaker: "Nick", text: "Los hadas son aburridos. Ellos son para los chicos. Yo soy un muchacho." },
+    { speaker: "Beth", text: "Ven conmigo." },
+    
+    { type: "scene", bg: "fairyland" },
+    { speaker: "Narrator", text: "(Beth lleva a Nick a Fairyland)" },
+    { speaker: "Beth", text: "¡Aquí está! ¡El mundo de los hadas!" },
+    { speaker: "Nick", text: "El mundo no es mágico." },
+    { speaker: "Beth", text: "¿Por que?" },
+    { speaker: "Nick", text: "Yo tengo el libro “Unfairies.” ¡Mira! Mi libro dice “Los hadas no son mágicos.”" },
+    { speaker: "Beth", text: "Yo tengo un libro también. Para, mi libro dice “Los hadas son muy mágicos.”" },
+    { speaker: "Nick", text: "Yo escribo un libro. Mi libro dice “Los hadas no son mágicos.”" },
+    { speaker: "Beth", text: "¡Escribe más! ¡Yo escribo 20 libros! Mis libros dicen “Los hadas son muy muy muy mágicos.”" },
+    { speaker: "Nick", text: "Yo puedo escribir un poco. ¡No puedo escribir, escribir, escribir!" },
+    { speaker: "Beth", text: "¡Mira! ¡Una pastelería al lado de la escuela! Los pasteles están muy deliciosos." },
+    { speaker: "Nick", text: "Están deliciosos, deliciosos, deliciosos. ¡Vamos!" },
+
+    { type: "scene", bg: "bakery" },
+    { speaker: "Beth", text: "¿Dónde está mi hada?" },
+    { speaker: "Person", text: "¿Tu hada de Dios? ¿Tu hada de madre? ¿Tu hada…  Diosmadre???" },
+    { speaker: "Beth", text: "Si, si." },
+    { speaker: "Nick", text: "Si, Si, Si, Si, Si." },
+    { speaker: "Beth", text: "¿Que?" },
+    { speaker: "Nick", text: "¡Si!" },
+    { speaker: "Beth", text: "Si." },
+    { speaker: "Person", text: "¡Aquí está! !Está encima de la mesa!", action: "show_fairy" },
+    { speaker: "Beth", text: "¿Que??" },
+    { speaker: "Nick", text: "¿Que, Que, Que?" },
+    { speaker: "Hada", text: "Yo soy un hada." },
+    { speaker: "Beth", text: "¿Que? ¿Si? Si." },
+    { speaker: "Hada", text: "Si. Si." },
+    { speaker: "Nick", text: "No creo en los hadas." },
+    { speaker: "Hada", text: "¿Por que?" },
+    { speaker: "Nick", text: "No creo en los hadas, porque ellos son aburridos." },
+    { speaker: "Hada", text: "¡No soy aburrido! ¡No creo en los chicos!" },
+    { speaker: "Nick", text: "¿Que?????", action: "nick_vanish" },
+    { speaker: "Beth", text: "¡¡¡Mi hermano!!! ¡¡¡No!!!" },
+    { speaker: "Hada", text: "Él no cree en los hadas. No creo en los chicos, porque los chicos no creen en los hadas." },
+    { speaker: "Beth", text: "¿Cómo te llamas?" },
+    { speaker: "Hada", text: "Me llamo Hada." },
+    
+    { type: "scene", bg: "black" },
+    { speaker: "", text: "*fade to black*" },
+    
+    { type: "scene", bg: "anime" },
+    { speaker: "Beth", text: "¡EL PEOOOR DIAAAAAAAAAAA EN EL MUNDOOOOOOOO DESPUÉS MI HADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!", style: "anime" },
+    
+    { type: "scene", bg: "slap" },
+    { speaker: "SFX", text: "*Sonido de bofetada / SLAP*", style: "big" },
+
+    { type: "scene", bg: "end" },
+    { speaker: "Narrator", text: "Los hadas son muy muy muy malos en mi video. Adiós." }
+];
+
+let currentStep = -1;
+let currentScene = "bedroom";
+let characters = {
+    beth: { x: -100, y: 300, visible: true, color: "#ff9ff3" },
+    nick: { x: 500, y: 300, visible: true, color: "#54a0ff" },
+    person: { x: 600, y: 280, visible: false, color: "#feca57" },
+    fairy: { x: 400, y: 200, visible: false, color: "#5f27cd" }
+};
+let shakeAmount = 0;
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const uiSpeaker = document.getElementById('speaker-name');
+const uiText = document.getElementById('dialogue-text');
+
+function resize() {
+    canvas.width = 800;
+    canvas.height = 450;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function advanceStory() {
+    currentStep++;
+    if (currentStep >= script.length) return;
+
+    const step = script[currentStep];
+
+    if (step.type === "scene") {
+        currentScene = step.bg;
+        if (currentScene === "bedroom") {
+            characters.beth.visible = true; characters.beth.x = 150;
+            characters.nick.visible = true; characters.nick.x = 500;
+            characters.person.visible = false; characters.fairy.visible = false;
+        } else if (currentScene === "fairyland") {
+            characters.beth.x = 200; characters.nick.x = 400;
+        } else if (currentScene === "bakery") {
+            characters.beth.x = 150; characters.nick.x = 300;
+            characters.person.visible = true; characters.person.x = 600;
+        }
+        
+        if(step.text) {
+             uiSpeaker.innerText = step.speaker || "";
+             uiText.innerText = step.text;
+        } else {
+             advanceStory(); 
+        }
+        return;
+    }
+
+    if (step.action === "beth_enter") characters.beth.x = 150;
+    if (step.action === "show_fairy") characters.fairy.visible = true;
+    if (step.action === "nick_vanish") characters.nick.visible = false;
+
+    uiSpeaker.innerText = step.speaker;
+    uiText.innerText = step.text;
+
+    if (step.style === "anime") {
+        shakeAmount = 15;
+        uiText.style.fontSize = "1.6rem";
+        uiText.style.color = "#ff4d4d";
+    } else {
+        shakeAmount = 0;
+        uiText.style.fontSize = "1.15rem";
+        uiText.style.color = "#dfe6e9";
+    }
+}
+
+function drawBackground() {
+    ctx.save();
+    let skyColor = "#87CEEB"; 
+    let groundColor = "#8BC34A";
+
+    if (currentScene === "bedroom") {
+        skyColor = "#f1f2f6"; groundColor = "#747d8c";
+    } else if (currentScene === "fairyland") {
+        skyColor = "#ff9ff3"; groundColor = "#55efc4";
+    } else if (currentScene === "bakery") {
+        skyColor = "#ffeaa7"; groundColor = "#e17055";
+    } else if (currentScene === "black" || currentScene === "slap") {
+        skyColor = "#000"; groundColor = "#000";
+    } else if (currentScene === "anime") {
+        skyColor = "#fff"; groundColor = "#fff";
+    }
+
+    ctx.fillStyle = skyColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    if (currentScene === "anime") drawSpeedLines();
+
+    if (!["black", "anime", "slap", "end"].includes(currentScene)) {
+        ctx.fillStyle = groundColor;
+        ctx.fillRect(0, 300, canvas.width, 150);
+    }
+
+    if (currentScene === "bedroom") {
+        ctx.fillStyle = "#a29bfe"; ctx.fillRect(50, 150, 100, 150);
+        ctx.fillStyle = "#0984e3"; ctx.fillRect(450, 250, 200, 50);
+    } else if (currentScene === "fairyland") {
+        drawTree(100, 300, "#00b894");
+        drawTree(600, 300, "#00cec9");
+    } else if (currentScene === "bakery") {
+        ctx.fillStyle = "#d63031"; ctx.fillRect(500, 200, 200, 100);
+    } else if (currentScene === "slap") {
+        ctx.fillStyle = "white"; ctx.font = "bold 80px sans-serif"; ctx.textAlign = "center";
+        ctx.fillText("¡SLAP!", canvas.width/2, canvas.height/2);
+    } else if (currentScene === "end") {
+        ctx.fillStyle = "white"; ctx.font = "24px sans-serif"; ctx.textAlign = "center";
+        ctx.fillText("Fin.", canvas.width/2, canvas.height/2);
+    }
+    ctx.restore();
+}
+
+function drawSpeedLines() {
+    ctx.save();
+    ctx.translate(canvas.width/2, canvas.height/2);
+    ctx.strokeStyle = "rgba(0,0,0,0.5)";
+    ctx.lineWidth = 1.5;
+    for(let i=0; i<70; i++) {
+        ctx.rotate(Math.random() * Math.PI * 2);
+        ctx.beginPath(); ctx.moveTo(90, 0); ctx.lineTo(650, 0); ctx.stroke();
+    }
+    ctx.restore();
+}
+
+function drawTree(x, y, color) {
+    ctx.fillStyle = "#636e72"; ctx.fillRect(x-8, y-40, 16, 40);
+    ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x, y-50, 35, 0, Math.PI*2); ctx.fill();
+}
+
+function drawCharacter(charKey, charData, time) {
+    if (!charData.visible) return;
+    let yOffset = Math.sin(time * 0.005 + (charData.x)) * 4;
+    let x = charData.x;
+    let y = charData.y + yOffset;
+
+    if (currentScene === "anime" && charKey === "beth") {
+        x = canvas.width/2; y = canvas.height/2 + 60;
+        ctx.save(); ctx.translate(x, y); ctx.scale(3.8, 3.8);
+        drawPersonBody(0, 0, charData.color, charKey); ctx.restore();
+        return;
+    }
+
+    ctx.save(); ctx.translate(x, y);
+    drawPersonBody(0, 0, charData.color, charKey);
+    ctx.restore();
+}
+
+function drawPersonBody(x, y, color, type) {
+    ctx.fillStyle = color;
+    if (type === "beth") {
+        ctx.beginPath(); ctx.moveTo(0, -30); ctx.lineTo(-20, 50); ctx.lineTo(20, 50); ctx.fill();
+    } else if (type === "fairy") {
+        ctx.beginPath(); ctx.arc(0, 0, 12, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+        ctx.beginPath(); ctx.ellipse(-18, -8, 18, 8, Math.PI/4, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(18, -8, 18, 8, -Math.PI/4, 0, Math.PI*2); ctx.fill();
+    } else {
+        ctx.fillRect(-12, -30, 24, 80);
+    }
+
+    ctx.fillStyle = "#ffdbac";
+    if (type === "fairy") ctx.fillStyle = "#e0e0e0";
+    ctx.beginPath(); ctx.arc(0, -40, 18, 0, Math.PI*2); ctx.fill();
+
+    ctx.fillStyle = "#000";
+    ctx.beginPath(); ctx.arc(-6, -42, 2, 0, Math.PI*2); ctx.arc(6, -42, 2, 0, Math.PI*2); ctx.fill();
+
+    ctx.beginPath();
+    if (currentScene === "anime" && type === "beth") ctx.ellipse(0, -30, 8, 12, 0, 0, Math.PI*2);
+    else ctx.arc(0, -35, 8, 0.2, Math.PI-0.2);
+    ctx.fill();
+
+    if(type !== "fairy" && currentScene !== "anime") {
+        ctx.fillStyle = "rgba(255,255,255,0.8)"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+        ctx.fillText(type.toUpperCase(), 0, -65);
+    }
+}
+
+function loop(timestamp) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    if (shakeAmount > 0) {
+        ctx.translate((Math.random()-0.5)*shakeAmount, (Math.random()-0.5)*shakeAmount);
+    }
+    drawBackground();
+    if (!["black", "end", "slap"].includes(currentScene)) {
+        drawCharacter("person", characters.person, timestamp);
+        drawCharacter("fairy", characters.fairy, timestamp);
+        drawCharacter("nick", characters.nick, timestamp);
+        drawCharacter("beth", characters.beth, timestamp);
+    }
+    ctx.restore();
+    requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+</script>
+
+</body>
+</html>

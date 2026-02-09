@@ -1,0 +1,66 @@
+body {
+   background-color: black;
+   background-image: url(download2.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+   margin: 0px;
+   background-attachment: fixed;
+} .mainBanner {
+    text-align: center;
+    background-color: rgb(18, 13, 36);
+    border-radius: 20px;   
+} .MainBanText {
+    font-family: Arial, Helvetica, sans-serif;
+    color: darkblue;
+} .buttons {
+  text-align: center;
+  background-color: black;
+  background-image: url(Understanding-Colors.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;   
+} .SiteBlurb {
+  text-align: center;
+  background-image: url(2024111615302900_c.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;   
+} .webTut {
+  color: blue;
+  background-color: lightseagreen;
+} .MainBanText2 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: darkblue;
+    background-color: darkred;
+} .BIGRED {
+  size: 500px;
+  color: red;
+  background-color: darkred;
+} .story {
+  text-align: center;
+  background-color: black;
+  background-image: url(Understanding-Colors.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkblue;  
+} .MyPhilosophy {
+  text-align: center;
+  background-color: black;
+  background-image: url(WIN_20250904_09_57_50_Pro.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkblue; 
+} .Coffee {
+  text-align: center;
+  background-color: black;
+  background-image: url(coffeemagic-v0-8n7koixkxm7c1.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px; 
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkblue; 
+}

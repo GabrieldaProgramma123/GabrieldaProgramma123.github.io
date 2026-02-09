@@ -1,0 +1,12 @@
+.char {
+    position: absolute;
+    border-radius: 50px;
+    left: 50px;
+    top: 500px;
+    background-color: aqua;
+} .big {
+    width: 500000000px;
+    height: 5000px;
+} .link {
+    position: fixed;
+}
