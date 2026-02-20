@@ -437,7 +437,7 @@ function npc(name, xpos, ypos, dialogue) {
     }
   }
 }
-function Enemy(xps, yps, baseDmg, hlth) {
+function Enemy(xps, yps, hlth, baseDmg) {
   this.xps = xps;
   this.yps = yps;
   this.baseDMG = baseDmg;
