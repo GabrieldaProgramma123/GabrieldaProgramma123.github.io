@@ -64,80 +64,103 @@ var kids = [];
 var buttons = [];
 var buttonPoses = [];
 var inv = [];
-var weaponData = ["dummy", "Rusty Blade", 1, 25, "Old Sword", 1.5, 50, "Axe", 2, 70, "Nice Axe", 4, 90, "Shiny Sword", 6, 120, "The Worst Sword Ever", 0.01, 0, "Car", "NA", 50000];
+var weaponData = [
+  "dummy",
+  "Rusty Blade",
+  1,
+  25,
+  "Old Sword",
+  1.5,
+  50,
+  "Axe",
+  2,
+  70,
+  "Nice Axe",
+  4,
+  90,
+  "Shiny Sword",
+  6,
+  120,
+  "The Worst Sword Ever",
+  0.01,
+  0,
+  "Car",
+  "NA",
+  50000,
+];
 var forsale = [weaponData[1], weaponData[4], weaponData[7], weaponData[16]];
 var interact1 = ["Hi!", "Hello!"];
 const baddies = [];
 const save = {
-xpos: xpos,
-ypos: ypos,
-canmove: canmove,
-onSurface: onSurface,
-whattobuy: whattobuy,
-equippedWeapon: equippedWeapon,
-money: money,
-moneyPoins: moneyPoins,
-subscribed: subscribed,
-anger: anger,
-xp: xp,
-health: health,
-leftBound: leftBound,
-rightBound: rightBound,
-upBound: upBound,
-downBound: downBound,
-gameLoop: gameLoop,
-atHome: atHome,
-detrimVal: detrimVal,
-going: going,
-going2: going2,
-stopped: stopped,
-initJumpY: initJumpY,
-initJumpX: initJumpX,
-jumpY: jumpY,
-jumpX: jumpX,
-jumping: jumping,
-velocityY: velocityY,
-gravity: gravity,
-jumpStrength: jumpStrength,
-loading: loading,
-randNum: randNum,
-buttonVar: buttonVar,
-buttonLet: buttonLet,
-idstring: idstring,
-kidstring: kidstring,
-foestring: foestring,
-foeval: foeval,
-kidval: kidval,
-car: car,
-forsaleVal: forsaleVal,
-time: time,
-outerTime: outerTime,
-innerTimeString: innerTimeString,
-hours: hours,
-pm: pm,
-isTimeSwitched: isTimeSwitched,
-isEnemyMade: isEnemyMade,
-isDay: isDay,
-days: days,
-debt: debt,
-costNum: costNum,
-childName: childName,
-childGender: childGender,
-xxyy: xxyy,
-charisma: charisma,
-interacting: interacting,
-lootVal: lootVal,
-kids: kids,
-buttons: buttons,
-buttonPoses: buttonPoses,
-inv: inv,
-weaponData: weaponData,
-forsale: forsale,
-interact1: interact1,
-isPaused: isPaused,
-strength: strength,
-foeStrength: foeStrength
-}
+  xpos: xpos,
+  ypos: ypos,
+  canmove: canmove,
+  onSurface: onSurface,
+  whattobuy: whattobuy,
+  equippedWeapon: equippedWeapon,
+  money: money,
+  moneyPoins: moneyPoins,
+  subscribed: subscribed,
+  anger: anger,
+  xp: xp,
+  health: health,
+  leftBound: leftBound,
+  rightBound: rightBound,
+  upBound: upBound,
+  downBound: downBound,
+  gameLoop: gameLoop,
+  atHome: atHome,
+  detrimVal: detrimVal,
+  going: going,
+  going2: going2,
+  stopped: stopped,
+  initJumpY: initJumpY,
+  initJumpX: initJumpX,
+  jumpY: jumpY,
+  jumpX: jumpX,
+  jumping: jumping,
+  velocityY: velocityY,
+  gravity: gravity,
+  jumpStrength: jumpStrength,
+  loading: loading,
+  randNum: randNum,
+  buttonVar: buttonVar,
+  buttonLet: buttonLet,
+  idstring: idstring,
+  kidstring: kidstring,
+  foestring: foestring,
+  foeval: foeval,
+  kidval: kidval,
+  car: car,
+  forsaleVal: forsaleVal,
+  time: time,
+  outerTime: outerTime,
+  innerTimeString: innerTimeString,
+  hours: hours,
+  pm: pm,
+  isTimeSwitched: isTimeSwitched,
+  isEnemyMade: isEnemyMade,
+  isDay: isDay,
+  days: days,
+  debt: debt,
+  costNum: costNum,
+  childName: childName,
+  childGender: childGender,
+  xxyy: xxyy,
+  charisma: charisma,
+  interacting: interacting,
+  lootVal: lootVal,
+  kids: kids,
+  buttons: buttons,
+  buttonPoses: buttonPoses,
+  inv: inv,
+  weaponData: weaponData,
+  forsale: forsale,
+  interact1: interact1,
+  isPaused: isPaused,
+  strength: strength,
+  foeStrength: foeStrength,
+};
 
 /* 
 weapon, damage, cost
@@ -155,7 +178,7 @@ function isAt(xcor, ycor) {
 }
 
 function isWithin(target, firstval, lastval) {
-  return target > firstval && target < lastval
+  return target > firstval && target < lastval;
 }
 
 function animate() {
@@ -201,7 +224,7 @@ function animate() {
   }
   // create enemies
   // babysitting loop
-  
+
   // check if interacting
   document.getElementById("main").style.left = `${xpos}px`;
   document.getElementById("main").style.top = `${ypos}px`;
@@ -222,20 +245,23 @@ function animate() {
   if (isAt(7441, 7459)) {
     sleep("bed");
   }
-  document.getElementById("money").innerHTML = `Coins: ${money} <br> XP: ${xp}`
-  document.getElementById("healthy").innerHTML = `Health: ${health}`
-  document.getElementById("main").scrollIntoView({ behavior: 'smooth', block: 'center', inline: `center` });
+  document.getElementById("money").innerHTML = `Coins: ${money} <br> XP: ${xp}`;
+  document.getElementById("healthy").innerHTML = `Health: ${health}`;
+  document
+    .getElementById("main")
+    .scrollIntoView({ behavior: "smooth", block: "center", inline: `center` });
   if (health <= 0) {
     gameOver();
   }
 }
 function pause() {
   isPaused = true;
-  document.getElementById("dayNight").style.backgroundColor = "rgba(0, 0, 0, 0.50)";
+  document.getElementById("dayNight").style.backgroundColor =
+    "rgba(0, 0, 0, 0.50)";
   const menu = document.createElement("div");
   const unpaused = document.createElement("button");
   menu.id = "lilMenu";
-  unpaused.id = "stopstop"
+  unpaused.id = "stopstop";
   document.body.append(menu);
   menu.style.position = "fixed";
   menu.style.backgroundColor = "red";
@@ -245,126 +271,149 @@ function pause() {
   menu.style.zIndex = "2";
   menu.style.left = "200px";
   menu.style.top = "5px";
-  menu.innerHTML = "Car:<br> 50,000 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
+  menu.innerHTML =
+    "Car:<br> 50,000 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
   unpaused.setAttribute("onclick", "unpause()");
   unpaused.innerHTML = "unpause";
   unpaused.style.position = "fixed";
-  unpaused.style.left = "200px";
-  unpaused.style.top = "290px";
+  unpaused.style.left = "300px";
+  unpaused.style.top = "5px";
   unpaused.style.zIndex = "2";
-  }
+}
 function unpause() {
   isPaused = false;
-  document.body.removeChild(document.getElementById("lilMenu"))
-  document.body.removeChild(document.getElementById("stopstop"))
+  document.body.removeChild(document.getElementById("lilMenu"));
+  document.body.removeChild(document.getElementById("stopstop"));
   if (isDay) {
-    document.getElementById("dayNight").style.backgroundColor = "rgba(0, 0, 0, 0)";
+    document.getElementById("dayNight").style.backgroundColor =
+      "rgba(0, 0, 0, 0)";
   } else {
     document.getElementById("dayNight").style.backgroundColor = "#00006480";
   }
 }
 function clock() {
   if (!isPaused) {
-  time += 1;
-  outerTime += 1;
-  if (pm) {
-    if (outerTime < 10) {
-      innerTimeString = `0${outerTime}PM`
+    time += 1;
+    outerTime += 1;
+    if (pm) {
+      if (outerTime < 10) {
+        innerTimeString = `0${outerTime}PM`;
+      } else {
+        innerTimeString = `${outerTime}PM`;
+      }
+    }
+    if (!pm) {
+      if (outerTime < 10) {
+        innerTimeString = `0${outerTime}AM`;
+      } else {
+        innerTimeString = `${outerTime}AM`;
+      }
+    }
+    if (outerTime >= 60) {
+      outerTime = 0;
+      hours++;
+      createEnemies(
+        getRndInteger(150, 500),
+        getRndInteger(500, 1000),
+        getRndInteger(5, foeStrength),
+        10,
+      );
+    }
+    if (hours > 12) {
+      hours = 1;
+      isTimeSwitched = false;
+    }
+    if (hours >= 12) {
+      if (!isTimeSwitched) {
+        pm = !pm;
+      }
+      isTimeSwitched = true;
+    }
+    if (
+      (hours >= 9 && hours !== 12 && pm) ||
+      (hours < 8 && !pm) ||
+      (hours === 12 && !pm)
+    ) {
+      document.getElementById("dayNight").style.backgroundColor = "#00006480";
+      isDay = false;
     } else {
-      innerTimeString = `${outerTime}PM`;
+      document.getElementById("dayNight").style.backgroundColor = "#ffffff00";
+      isDay = true;
     }
-  }
-  if (!pm) {
-    if (outerTime < 10) {
-      innerTimeString = `0${outerTime}AM`
-    } else {
-      innerTimeString = `${outerTime}AM`;
+    if (hours === 2 && !pm) {
+      sleep("candid");
     }
-  }
-  if (outerTime >= 60) {
-    outerTime = 0;
-    hours++;
-    createEnemies(getRndInteger(150, 500), getRndInteger(500, 1000), getRndInteger(5, foeStrength), 10);
-  }
-  if (hours > 12) {
-    hours = 1;
-    isTimeSwitched = false;
-  }
-  if (hours >= 12) {
-    if (!isTimeSwitched) {
-      pm = !pm;
-    }
-    isTimeSwitched = true;
-  }
-  if (((hours >= 9 && hours !== 12) && pm) || (hours < 8 && !pm) || (hours === 12 && !pm)) {
-    document.getElementById("dayNight").style.backgroundColor = "#00006480";
-    isDay = false;
-  } else {
-    document.getElementById("dayNight").style.backgroundColor = "#ffffff00";
-    isDay = true;
-  }
-  if (hours === 2 && !pm) {
-    sleep("candid");
-  }
-  for (let i = 0; i < kids.length; i++) {
-    if (!kids[i].dead) {
-      if (time % kids[i].randomHunger === 0) {
-        kids[i].processEat();
-        if (kids[i].hunger >= 7) {
-          alert(`Your ${kids[i].gender} ${kids[i].name} is getting very hungry.`);
-        } else {
-          alert(`Your ${kids[i].gender} ${kids[i].name} is getting hungry.`);
+    for (let i = 0; i < kids.length; i++) {
+      if (!kids[i].dead) {
+        if (time % kids[i].randomHunger === 0) {
+          kids[i].processEat();
+          if (kids[i].hunger >= 7) {
+            alert(
+              `Your ${kids[i].gender} ${kids[i].name} is getting very hungry.`,
+            );
+          } else {
+            alert(`Your ${kids[i].gender} ${kids[i].name} is getting hungry.`);
+          }
         }
-
-      }
-      if (isAt(7423, 7189)) {
-        if (kids.length !== 0) {
-          kids[i].processEating();
-          alert("Your kids have eaten");
-        } else {
-          alert("There is no one to feed");
+        if (isAt(7423, 7189)) {
+          if (kids.length !== 0) {
+            kids[i].processEating();
+            alert("Your kids have eaten");
+          } else {
+            alert("There is no one to feed");
+          }
         }
+        kids[i].xpos = xpos;
+        kids[i].ypos = ypos;
+        document.getElementById(`KU-${i}`).style.left = `${kids[i].xpos}px`;
+        document.getElementById(`KU-${i}`).style.top =
+          `${kids[i].ypos - 6 * i}px`;
       }
-      kids[i].xpos = xpos;
-      kids[i].ypos = ypos;
-      document.getElementById(`KU-${i}`).style.left = `${kids[i].xpos}px`;
-      document.getElementById(`KU-${i}`).style.top = `${kids[i].ypos - (6 * i)}px`;
-    }
-    if (kids[i].dead = true) {
-      kids.splice(i, 1);
-    }
-  }
-  document.getElementById("time").innerHTML = `TIME: ${hours}:${innerTimeString}<br>DAYS SPENT: ${days}`;
-  for (let i = 0; i < baddies.length; i++) {
-    if (!atHome && !baddies[i].dead) {
-      if (isWithin(baddies[i].xps, (xpos - 20), (xpos + 20)) && isWithin(baddies[i].yps, (ypos - 20), (ypos + 20))) {
-        baddies[i].onCollision();
+      if ((kids[i].dead = true)) {
+        kids.splice(i, 1);
       }
-      if (ypos > 700) {
-        if (time % 2 === 0) {
-          baddies[i].chase();
-          if (document.getElementById(`RU-${i}`) !== null) {  
-          document.getElementById(`RU-${i}`).style.left = `${baddies[i].xps}px`;
-          document.getElementById(`RU-${i}`).style.top = `${baddies[i].yps}px`;
-          } 
+    }
+    document.getElementById("time").innerHTML =
+      `TIME: ${hours}:${innerTimeString}<br>DAYS SPENT: ${days}`;
+    for (let i = 0; i < baddies.length; i++) {
+      if (!atHome && !baddies[i].dead) {
+        if (
+          isWithin(baddies[i].xps, xpos - 20, xpos + 20) &&
+          isWithin(baddies[i].yps, ypos - 20, ypos + 20)
+        ) {
+          baddies[i].onCollision();
+        }
+        if (ypos > 700) {
+          if (time % 2 === 0) {
+            baddies[i].chase();
+            if (document.getElementById(`RU-${i}`) !== null) {
+              document.getElementById(`RU-${i}`).style.left =
+                `${baddies[i].xps}px`;
+              document.getElementById(`RU-${i}`).style.top =
+                `${baddies[i].yps}px`;
+            }
+          }
+        }
+        if (document.getElementById(`RU-${i}`) !== null) {
+          document.getElementById(`RU-${i}`).innerHTML = baddies[i].hp;
+        }
+        if (baddies[i].hp <= 0) {
+          baddies[i].die();
         }
       }
-      if (document.getElementById(`RU-${i}`) !== null) {  
-      document.getElementById(`RU-${i}`).innerHTML = baddies[i].hp;
-      }
-      if (baddies[i].hp <= 0) {
-        baddies[i].die();
-      }
     }
   }
-}
 }
 function interact() {
   for (let i = 0; i < baddies.length; i++) {
-    if (isWithin(baddies[i].xps, (xpos - 50), (xpos + 50)) && isWithin(baddies[i].yps, (ypos - 50), (ypos + 50)) && ypos > 700) {
+    if (
+      isWithin(baddies[i].xps, xpos - 50, xpos + 50) &&
+      isWithin(baddies[i].yps, ypos - 50, ypos + 50) &&
+      ypos > 700
+    ) {
       baddies[i].hp -= strength;
     }
   }
@@ -395,7 +444,7 @@ function sleep(type) {
     newDay();
   } else if (type === "candid") {
     newDay();
-    health -= (health * (detrimVal / 16));
+    health -= health * (detrimVal / 16);
     detrimVal++;
   }
 }
@@ -403,8 +452,8 @@ let updater = setInterval(animate, 20);
 let updaterTime = setInterval(clock, 700);
 
 function birth() {
-  alert("You're having a baby!")
-  xxyy = getRndInteger(1, 2)
+  alert("You're having a baby!");
+  xxyy = getRndInteger(1, 2);
   if (xxyy === 2) {
     childGender = "boy";
     alert(`It's a ${childGender}!`);
@@ -425,14 +474,17 @@ function createEnemies(xpss, ypss, hlt, dmg) {
   foeval++;
 }
 function createBoss() {
-  const foe = new Enemy(getRndInteger(150, 500), getRndInteger(500, 1000), 10, 100);
+  const foe = new Enemy(
+    getRndInteger(150, 500),
+    getRndInteger(500, 1000),
+    10,
+    100,
+  );
   foe.born();
   baddies.push(foe);
   foeval++;
 }
-function bake() {
-
-}
+function bake() {}
 // constructor functions
 function child(name, gender) {
   this.name = name;
@@ -447,20 +499,20 @@ function child(name, gender) {
     this.form.setAttribute("id", kidstring + kidval);
     this.form.setAttribute("class", "kids");
     document.body.appendChild(this.form);
-  }
+  };
   this.processEat = function () {
     this.hunger++;
     if (this.hunger >= 10) {
-      this.die()
+      this.die();
     }
-  }
+  };
   this.processEating = function () {
     this.hunger--;
-  }
+  };
   this.die = function () {
     document.body.removeChild(this.form);
     this.dead = true;
-  }
+  };
 }
 function coin(xpos, ypos) {
   this.xpos = xpos;
@@ -482,7 +534,7 @@ function npc(name, xpos, ypos, dialogue) {
       birth();
       // birth params = mother, father
     }
-  }
+  };
 }
 function Enemy(xps, yps, hlth, baseDmg) {
   this.xps = xps;
@@ -493,7 +545,7 @@ function Enemy(xps, yps, hlth, baseDmg) {
   this.hp = hlth;
   this.onCollision = function () {
     health -= this.baseDMG;
-  }
+  };
   this.chase = function () {
     if (this.xps < xpos) {
       this.xps += 18;
@@ -507,83 +559,83 @@ function Enemy(xps, yps, hlth, baseDmg) {
     if (this.yps > ypos) {
       this.yps -= 18;
     }
-  }
+  };
   this.born = function () {
     document.body.appendChild(this.form);
     this.form.setAttribute("class", "foes");
     this.form.setAttribute("id", foestring + foeval);
-  }
+  };
   this.die = function () {
     this.dead = true;
     money += Math.ceil(hlth / 2);
     xp += Math.ceil(hlth / 2);
-  }
+  };
 }
 // constructors end
 function saveProgress() {
-save.xpos = xpos;
-save.ypos = ypos;
-save.canmove = canmove;
-save.onSurface = onSurface;
-save.whattobuy = whattobuy;
-save.equippedWeapon = equippedWeapon;
-save.money = money;
-save.moneyPoins = moneyPoins;
-save.subscribed = subscribed;
-save.anger = anger;
-save.xp = xp;
-save.health = health;
-save.leftBound = leftBound;
-save.rightBound = rightBound;
-save.upBound = upBound;
-save.downBound = downBound;
-save.atHome = atHome;
-save.detrimVal = detrimVal;
-save.going = going;
-save.going2 = going2;
-save.stopped = stopped;
-save.initJumpY = initJumpY;
-save.initJumpX = initJumpX;
-save.jumpY = jumpY;
-save.jumpX = jumpX;
-save.jumping = jumping;
-save.velocityY = velocityY;
-save.gravity = gravity;
-save.jumpStrength = jumpStrength;
-save.loading = loading;
-save.randNum = randNum;
-save.buttonVar = buttonVar;
-save.buttonLet = buttonLet;
-save.idstring = idstring;
-save.kidstring = kidstring;
-save.foestring = foestring;
-save.foeval = 0;
-save.kidval = kidval;
-save.car = car;
-save.forsaleVal = forsaleVal;
-save.time = time;
-save.outerTime = outerTime;
-save.innerTimeString = innerTimeString;
-save.hours = hours;
-save.pm = pm;
-save.isTimeSwitched = isTimeSwitched;
-save.isEnemyMade = isEnemyMade;
-save.isDay = isDay;
-save.days = days;
-save.debt = debt;
-save.costNum = costNum;
-save.childName = childName;
-save.childGender = childGender;
-save.xxyy = xxyy;
-save.charisma = charisma;
-save.interacting = interacting;
-save.lootVal = lootVal;
-save.inv = inv;
-save.interact1 = interact1;
-save.isPaused = isPaused;
-save.strength = strength;
-save.foeStrength = foeStrength;
-localStorage.setItem("saves", JSON.stringify(save));
+  save.xpos = xpos;
+  save.ypos = ypos;
+  save.canmove = canmove;
+  save.onSurface = onSurface;
+  save.whattobuy = whattobuy;
+  save.equippedWeapon = equippedWeapon;
+  save.money = money;
+  save.moneyPoins = moneyPoins;
+  save.subscribed = subscribed;
+  save.anger = anger;
+  save.xp = xp;
+  save.health = health;
+  save.leftBound = leftBound;
+  save.rightBound = rightBound;
+  save.upBound = upBound;
+  save.downBound = downBound;
+  save.atHome = atHome;
+  save.detrimVal = detrimVal;
+  save.going = going;
+  save.going2 = going2;
+  save.stopped = stopped;
+  save.initJumpY = initJumpY;
+  save.initJumpX = initJumpX;
+  save.jumpY = jumpY;
+  save.jumpX = jumpX;
+  save.jumping = jumping;
+  save.velocityY = velocityY;
+  save.gravity = gravity;
+  save.jumpStrength = jumpStrength;
+  save.loading = loading;
+  save.randNum = randNum;
+  save.buttonVar = buttonVar;
+  save.buttonLet = buttonLet;
+  save.idstring = idstring;
+  save.kidstring = kidstring;
+  save.foestring = foestring;
+  save.foeval = 0;
+  save.kidval = kidval;
+  save.car = car;
+  save.forsaleVal = forsaleVal;
+  save.time = time;
+  save.outerTime = outerTime;
+  save.innerTimeString = innerTimeString;
+  save.hours = hours;
+  save.pm = pm;
+  save.isTimeSwitched = isTimeSwitched;
+  save.isEnemyMade = isEnemyMade;
+  save.isDay = isDay;
+  save.days = days;
+  save.debt = debt;
+  save.costNum = costNum;
+  save.childName = childName;
+  save.childGender = childGender;
+  save.xxyy = xxyy;
+  save.charisma = charisma;
+  save.interacting = interacting;
+  save.lootVal = lootVal;
+  save.inv = inv;
+  save.interact1 = interact1;
+  save.isPaused = isPaused;
+  save.strength = strength;
+  save.foeStrength = foeStrength;
+  localStorage.setItem("saves", JSON.stringify(save));
 }
 function loadSave() {
   const load = JSON.parse(localStorage.getItem("saves"));
@@ -603,94 +655,93 @@ function stopMovement() {
 }
 function moveLeft() {
   if (!isPaused) {
-  if (gameLoop) {
-    alert("Disabled");
-  } else if (xpos > leftBound) {
-    xpos -= 18;
-    if (xpos > 240 && xpos < 348) {
-      if (ypos > 294 && ypos < 348) {
-        shopMenu();
+    if (gameLoop) {
+      alert("Disabled");
+    } else if (xpos > leftBound) {
+      xpos -= 18;
+      if (xpos > 240 && xpos < 348) {
+        if (ypos > 294 && ypos < 348) {
+          shopMenu();
+        }
       }
+      if (xpos === 240 && ypos === 420) {
+        goToHome();
+      }
+      if (xpos === 7045 && ypos === 7495) {
+        goHome();
+      }
+      moneyPoins += 0.1;
+      Math.floor(moneyPoins);
     }
-    if (xpos === 240 && ypos === 420) {
-      goToHome();
-    }
-    if (xpos === 7045 && ypos === 7495) {
-      goHome();
-    }
-    moneyPoins += 0.1;
-    Math.floor(moneyPoins);
   }
-}
 }
 function moveRight() {
   if (!isPaused) {
-  if (gameLoop) {
-    alert("Disabled");
-  } else if (xpos < rightBound) {
-    xpos += 18;
-    if (xpos > 240 && xpos < 348) {
-      if (ypos > 294 && ypos < 348) {
-        shopMenu();
+    if (gameLoop) {
+      alert("Disabled");
+    } else if (xpos < rightBound) {
+      xpos += 18;
+      if (xpos > 240 && xpos < 348) {
+        if (ypos > 294 && ypos < 348) {
+          shopMenu();
+        }
       }
+      if (xpos === 240 && ypos === 420) {
+        goToHome();
+      }
+      if (xpos === 7045 && ypos === 7495) {
+        goHome();
+      }
+      moneyPoins += 0.1;
+      Math.floor(moneyPoins);
     }
-    if (xpos === 240 && ypos === 420) {
-      goToHome();
-    }
-    if (xpos === 7045 && ypos === 7495) {
-      goHome();
-    }
-    moneyPoins += 0.1;
-    Math.floor(moneyPoins);
   }
-}
 }
 function moveUp() {
   if (!isPaused) {
-  if (gameLoop) {
-    alert("Disabled");
-  } else if (ypos > upBound) {
-    ypos -= 18;
-    if (xpos > 240 && xpos < 348) {
-      if (ypos > 294 && ypos < 348) {
-        shopMenu();
+    if (gameLoop) {
+      alert("Disabled");
+    } else if (ypos > upBound) {
+      ypos -= 18;
+      if (xpos > 240 && xpos < 348) {
+        if (ypos > 294 && ypos < 348) {
+          shopMenu();
+        }
       }
+      if (xpos === 240 && ypos === 420) {
+        goToHome();
+      }
+      if (xpos === 7045 && ypos === 7495) {
+        goHome();
+      }
+      moneyPoins += 0.1;
+      Math.floor(moneyPoins);
     }
-    if (xpos === 240 && ypos === 420) {
-      goToHome();
-    }
-    if (xpos === 7045 && ypos === 7495) {
-      goHome();
-    }
-    moneyPoins += 0.1;
-    Math.floor(moneyPoins);
   }
-}
 }
 function moveDown() {
   if (!isPaused) {
-  if (gameLoop) {
-    going2 = !going2
-  } else if (ypos < downBound) {
-    ypos += 18;
-    if (car) {
-
-    }
-    if (xpos > 240 && xpos < 348) {
-      if (ypos > 294 && ypos < 348) {
-        shopMenu();
+    if (gameLoop) {
+      going2 = !going2;
+    } else if (ypos < downBound) {
+      ypos += 18;
+      if (car) {
       }
+      if (xpos > 240 && xpos < 348) {
+        if (ypos > 294 && ypos < 348) {
+          shopMenu();
+        }
+      }
+      if (xpos === 240 && ypos === 420) {
+        goToHome();
+      }
+      if (xpos === 7045 && ypos === 7495) {
+        goHome();
+      }
+      moneyPoins += 0.1;
+      Math.floor(moneyPoins);
     }
-    if (xpos === 240 && ypos === 420) {
-      goToHome();
-    }
-    if (xpos === 7045 && ypos === 7495) {
-      goHome();
-    }
-    moneyPoins += 0.1;
-    Math.floor(moneyPoins);
   }
-}
 }
 function goToCave() {
   xpos = 5030;
@@ -735,10 +786,12 @@ function openInv() {
 }
 function shopMenu() {
   if (isDay) {
-    whattobuy = prompt(`Stuff Available: Car, Health Potion, Damage Upgrabe and These Items: ${forsale}`);
+    whattobuy = prompt(
+      `Stuff Available: Car, Health Potion, Damage Upgrade and These Items: ${forsale}`,
+    );
     for (let i = 0; i < forsale.length; i++) {
       if (whattobuy === forsale[i]) {
-        if (money >= (weaponData[weaponData.indexOf(whattobuy) + 2])) {
+        if (money >= weaponData[weaponData.indexOf(whattobuy) + 2]) {
           inv.push(forsale[i]);
           forsale.splice(i, 1);
           money -= weaponData[weaponData.indexOf(whattobuy) + 2];
@@ -756,15 +809,15 @@ function shopMenu() {
       } else {
         alert("Not Enough Money");
       }
+    }
     if (whattobuy === "Damage Upgrade") {
       if (money >= 20) {
-      strength++;
-      money -= 20;
-      alert("You now do 1 more damage per hit!")
+        strength++;
+        money -= 20;
+        alert("You now do 1 more damage per hit!");
       } else {
         alert("Not Enough Money");
       }
-    }
     }
     if (whattobuy === "Car") {
       if (money >= 50000) {
@@ -795,12 +848,16 @@ function tickle() {
   } else if (anger === 3) {
     alert("STOP! Don't make me use my button magic!");
   } else if (anger === 4) {
-    alert("What do you want, a story? If you tickle me again, you are not gonna live happily ever after in my book!");
+    alert(
+      "What do you want, a story? If you tickle me again, you are not gonna live happily ever after in my book!",
+    );
   } else if (anger === 5) {
-    alert(`Once upon a time, there was a button named Bob and a player named Boldilocks. Boldiloocks was a foolish teenager who loved to do unwise things. One day, she met Bob at ${xpos}, ${ypos} on the grid. Judging by the ${money} coins in her pocket, I knew I was gonna get tickled. I did get tickled, and then I decided to eat Boldilocks. Goodbye!`);
+    alert(
+      `Once upon a time, there was a button named Bob and a player named Boldilocks. Boldiloocks was a foolish teenager who loved to do unwise things. One day, she met Bob at ${xpos}, ${ypos} on the grid. Judging by the ${money} coins in her pocket, I knew I was gonna get tickled. I did get tickled, and then I decided to eat Boldilocks. Goodbye!`,
+    );
     gameOver();
   }
-  anger++
+  anger++;
 }
 function gameOver() {
   clearInterval(updater);
