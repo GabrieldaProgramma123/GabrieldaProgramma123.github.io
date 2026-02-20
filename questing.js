@@ -260,6 +260,8 @@ function pause() {
     "rgba(0, 0, 0, 0.50)";
   const menu = document.createElement("div");
   const unpaused = document.createElement("button");
+  const savepush = document.createElement("button");
+  const loadpush = document.createElement("button");
   menu.id = "lilMenu";
   unpaused.id = "stopstop";
   document.body.append(menu);
@@ -279,14 +281,30 @@ function pause() {
   unpaused.setAttribute("onclick", "unpause()");
   unpaused.innerHTML = "unpause";
   unpaused.style.position = "fixed";
-  unpaused.style.left = "300px";
+  unpaused.style.left = "330px";
   unpaused.style.top = "5px";
   unpaused.style.zIndex = "2";
+  savepush.id = "savid";
+  savepush.classList.add("items");
+  savepush.setAttribute("onclick", "saveProgress()");
+  savepush.innerHTML = "SAVE";
+  document.body.append(savepush);
+  savepush.style.left = "330px";
+  savepush.style.top = "30px";
+  loadpush.id = "loadid";
+  loadpush.classList.add("items");
+  document.body.append(loadpush);
+  loadpush.style.left = "330px";
+  loadpush.style.top = "50px";
+  loadpush.setAttribute("onclick", "loadSave()");
+  loadpush.innerHTML = "LOAD";
 }
 function unpause() {
   isPaused = false;
   document.body.removeChild(document.getElementById("lilMenu"));
   document.body.removeChild(document.getElementById("stopstop"));
+  document.body.removeChild(document.getElementById("savid"));
+  document.body.removeChild(document.getElementById("loadid"));
   if (isDay) {
     document.getElementById("dayNight").style.backgroundColor =
       "rgba(0, 0, 0, 0)";
@@ -632,7 +650,6 @@ function saveProgress() {
   save.lootVal = lootVal;
   save.inv = inv;
   save.interact1 = interact1;
-  save.isPaused = isPaused;
   save.strength = strength;
   save.foeStrength = foeStrength;
   localStorage.setItem("saves", JSON.stringify(save));
@@ -649,6 +666,9 @@ function loadSave() {
   for (let i = 0; i < baddies.length; i++) {
     baddies.pop();
   }
+  isPaused = true;
+  document.getElementById("dayNight").style.backgroundColor =
+    "rgba(0, 0, 0, 0.50)";
 }
 function stopMovement() {
   stopped = !stopped;
