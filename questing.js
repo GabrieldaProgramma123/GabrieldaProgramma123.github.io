@@ -57,6 +57,8 @@ var charisma = 0;
 var interacting = false;
 var lootVal = 0;
 var isPaused = false;
+var strength = 1;
+var foeStrength = 10;
 
 var kids = [];
 var buttons = [];
@@ -132,7 +134,9 @@ inv: inv,
 weaponData: weaponData,
 forsale: forsale,
 interact1: interact1,
-isPaused: isPaused
+isPaused: isPaused,
+strength: strength,
+foeStrength: foeStrength
 }
 
 /* 
@@ -241,7 +245,7 @@ function pause() {
   menu.style.zIndex = "2";
   menu.style.left = "200px";
   menu.style.top = "5px";
-  menu.innerHTML = "Car:<br> 50,000 coins<br>Health Potion:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
+  menu.innerHTML = "Car:<br> 50,000 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
@@ -283,7 +287,7 @@ function clock() {
   if (outerTime >= 60) {
     outerTime = 0;
     hours++;
-    // createEnemies(getRndInteger(150, 500), getRndInteger(500, 1000), getRndInteger(5, 30), 10);
+    createEnemies(getRndInteger(150, 500), getRndInteger(500, 1000), getRndInteger(5, foeStrength), 10);
   }
   if (hours > 12) {
     hours = 1;
@@ -361,7 +365,7 @@ function clock() {
 function interact() {
   for (let i = 0; i < baddies.length; i++) {
     if (isWithin(baddies[i].xps, (xpos - 50), (xpos + 50)) && isWithin(baddies[i].yps, (ypos - 50), (ypos + 50)) && ypos > 700) {
-      baddies[i].hp--;
+      baddies[i].hp -= strength;
     }
   }
 }
@@ -384,6 +388,7 @@ function newDay() {
   outerTime = 0;
   pm = false;
   goToHome();
+  foeStrength += 5;
 }
 function sleep(type) {
   if (type === "bed") {
@@ -575,6 +580,9 @@ save.interacting = interacting;
 save.lootVal = lootVal;
 save.inv = inv;
 save.interact1 = interact1;
+save.isPaused = isPaused;
+save.strength = strength;
+save.foeStrength = foeStrength;
 localStorage.setItem("saves", JSON.stringify(save));
 }
 function loadSave() {
@@ -727,7 +735,7 @@ function openInv() {
 }
 function shopMenu() {
   if (isDay) {
-    whattobuy = prompt(`Stuff Available: Health Potion and These Items: ${forsale}`);
+    whattobuy = prompt(`Stuff Available: Car, Health Potion, Damage Upgrabe and These Items: ${forsale}`);
     for (let i = 0; i < forsale.length; i++) {
       if (whattobuy === forsale[i]) {
         if (money >= (weaponData[weaponData.indexOf(whattobuy) + 2])) {
@@ -748,6 +756,15 @@ function shopMenu() {
       } else {
         alert("Not Enough Money");
       }
+    if (whattobuy === "Damage Upgrade") {
+      if (money >= 20) {
+      strength++;
+      money -= 20;
+      alert("You now do 1 more damage per hit!")
+      } else {
+        alert("Not Enough Money");
+      }
+    }
     }
     if (whattobuy === "Car") {
       if (money >= 50000) {
