@@ -38,6 +38,8 @@ body {
   border-color: white;
   size: 10px;
   z-index: 2;
+  top: 10px;
+  left: 75px;
 } .buzz {
   position: absolute;
   background-color: #00006480;

@@ -56,6 +56,7 @@ var xxyy;
 var charisma = 0;
 var interacting = false;
 var lootVal = 0;
+var isPaused = false;
 
 var kids = [];
 var buttons = [];
@@ -130,7 +131,8 @@ buttonPoses: buttonPoses,
 inv: inv,
 weaponData: weaponData,
 forsale: forsale,
-interact1: interact1
+interact1: interact1,
+isPaused: isPaused
 }
 
 /* 
@@ -195,6 +197,114 @@ function animate() {
   }
   // create enemies
   // babysitting loop
+  
+  // check if interacting
+  document.getElementById("main").style.left = `${xpos}px`;
+  document.getElementById("main").style.top = `${ypos}px`;
+  if (onSurface) {
+    if (xpos > 480 && xpos < 520) {
+      if (ypos > 165 && ypos < 175) {
+        goToCave();
+      }
+    }
+  }
+  if (subscribed) {
+    if (moneyPoins >= 1) {
+      money++;
+      moneyPoins = 0;
+    }
+    document.getElementById("points").innerHTML = `Points: ${moneyPoins}`;
+  }
+  if (isAt(7441, 7459)) {
+    sleep("bed");
+  }
+  document.getElementById("money").innerHTML = `Coins: ${money} <br> XP: ${xp}`
+  document.getElementById("healthy").innerHTML = `Health: ${health}`
+  document.getElementById("main").scrollIntoView({ behavior: 'smooth', block: 'center', inline: `center` });
+  if (health <= 0) {
+    gameOver();
+  }
+}
+function pause() {
+  isPaused = true;
+  document.getElementById("dayNight").style.backgroundColor = "rgba(0, 0, 0, 0.50)";
+  const menu = document.createElement("div");
+  const unpaused = document.createElement("button");
+  menu.id = "lilMenu";
+  unpaused.id = "stopstop"
+  document.body.append(menu);
+  menu.style.position = "fixed";
+  menu.style.backgroundColor = "red";
+  menu.style.color = "white";
+  menu.style.borderColor = "white";
+  menu.style.size = "10px";
+  menu.style.zIndex = "2";
+  menu.style.left = "200px";
+  menu.style.top = "5px";
+  menu.innerHTML = "Car:<br> 50,000 coins<br>Health Potion:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
+  document.body.append(unpaused);
+  unpaused.style.backgroundColor = "red";
+  unpaused.style.color = "white";
+  unpaused.setAttribute("onclick", "unpause()");
+  unpaused.innerHTML = "unpause";
+  unpaused.style.position = "fixed";
+  unpaused.style.left = "200px";
+  unpaused.style.top = "290px";
+  unpaused.style.zIndex = "2";
+  }
+function unpause() {
+  isPaused = false;
+  document.body.removeChild(document.getElementById("lilMenu"))
+  document.body.removeChild(document.getElementById("stopstop"))
+  if (isDay) {
+    document.getElementById("dayNight").style.backgroundColor = "rgba(0, 0, 0, 0)";
+  } else {
+    document.getElementById("dayNight").style.backgroundColor = "#00006480";
+  }
+}
+function clock() {
+  if (!isPaused) {
+  time += 1;
+  outerTime += 1;
+  if (pm) {
+    if (outerTime < 10) {
+      innerTimeString = `0${outerTime}PM`
+    } else {
+      innerTimeString = `${outerTime}PM`;
+    }
+  }
+  if (!pm) {
+    if (outerTime < 10) {
+      innerTimeString = `0${outerTime}AM`
+    } else {
+      innerTimeString = `${outerTime}AM`;
+    }
+  }
+  if (outerTime >= 60) {
+    outerTime = 0;
+    hours++;
+    // createEnemies(getRndInteger(150, 500), getRndInteger(500, 1000), getRndInteger(5, 30), 10);
+  }
+  if (hours > 12) {
+    hours = 1;
+    isTimeSwitched = false;
+  }
+  if (hours >= 12) {
+    if (!isTimeSwitched) {
+      pm = !pm;
+    }
+    isTimeSwitched = true;
+  }
+  if (((hours >= 9 && hours !== 12) && pm) || (hours < 8 && !pm) || (hours === 12 && !pm)) {
+    document.getElementById("dayNight").style.backgroundColor = "#00006480";
+    isDay = false;
+  } else {
+    document.getElementById("dayNight").style.backgroundColor = "#ffffff00";
+    isDay = true;
+  }
+  if (hours === 2 && !pm) {
+    sleep("candid");
+  }
   for (let i = 0; i < kids.length; i++) {
     if (!kids[i].dead) {
       if (time % kids[i].randomHunger === 0) {
@@ -223,75 +333,6 @@ function animate() {
       kids.splice(i, 1);
     }
   }
-  // check if interacting
-  document.getElementById("main").style.left = `${xpos}px`;
-  document.getElementById("main").style.top = `${ypos}px`;
-  if (onSurface) {
-    if (xpos > 480 && xpos < 520) {
-      if (ypos > 165 && ypos < 175) {
-        goToCave();
-      }
-    }
-  }
-  if (subscribed) {
-    if (moneyPoins >= 1) {
-      money++;
-      moneyPoins = 0;
-    }
-    document.getElementById("points").innerHTML = `Points: ${moneyPoins}`;
-  }
-  if (isAt(7441, 7459)) {
-    sleep("bed");
-  }
-  document.getElementById("money").innerHTML = `Coins: ${money} <br> XP: ${xp}`
-  document.getElementById("healthy").innerHTML = `Health: ${health}`
-  document.getElementById("main").scrollIntoView({ behavior: 'smooth', block: 'center', inline: `center` });
-  if (health <= 0) {
-    gameOver();
-  }
-}
-function clock() {
-  time += 1;
-  outerTime += 1;
-  if (pm) {
-    if (outerTime < 10) {
-      innerTimeString = `0${outerTime}PM`
-    } else {
-      innerTimeString = `${outerTime}PM`;
-    }
-  }
-  if (!pm) {
-    if (outerTime < 10) {
-      innerTimeString = `0${outerTime}AM`
-    } else {
-      innerTimeString = `${outerTime}AM`;
-    }
-  }
-  if (outerTime >= 60) {
-    outerTime = 0;
-    hours++;
-    createEnemies(getRndInteger(150, 500), getRndInteger(500, 1000), 10, getRndInteger(5, 30));
-  }
-  if (hours > 12) {
-    hours = 1;
-    isTimeSwitched = false;
-  }
-  if (hours >= 12) {
-    if (!isTimeSwitched) {
-      pm = !pm;
-    }
-    isTimeSwitched = true;
-  }
-  if (((hours >= 9 && hours !== 12) && pm) || (hours < 8 && !pm) || (hours === 12 && !pm)) {
-    document.getElementById("dayNight").style.backgroundColor = "#00006480";
-    isDay = false;
-  } else {
-    document.getElementById("dayNight").style.backgroundColor = "#ffffff00";
-    isDay = true;
-  }
-  if (hours === 2 && !pm) {
-    sleep("candid");
-  }
   document.getElementById("time").innerHTML = `TIME: ${hours}:${innerTimeString}<br>DAYS SPENT: ${days}`;
   for (let i = 0; i < baddies.length; i++) {
     if (!atHome && !baddies[i].dead) {
@@ -315,6 +356,7 @@ function clock() {
       }
     }
   }
+}
 }
 function interact() {
   for (let i = 0; i < baddies.length; i++) {
@@ -552,6 +594,7 @@ function stopMovement() {
   stopped = !stopped;
 }
 function moveLeft() {
+  if (!isPaused) {
   if (gameLoop) {
     alert("Disabled");
   } else if (xpos > leftBound) {
@@ -571,7 +614,9 @@ function moveLeft() {
     Math.floor(moneyPoins);
   }
 }
+}
 function moveRight() {
+  if (!isPaused) {
   if (gameLoop) {
     alert("Disabled");
   } else if (xpos < rightBound) {
@@ -591,7 +636,9 @@ function moveRight() {
     Math.floor(moneyPoins);
   }
 }
+}
 function moveUp() {
+  if (!isPaused) {
   if (gameLoop) {
     alert("Disabled");
   } else if (ypos > upBound) {
@@ -611,7 +658,9 @@ function moveUp() {
     Math.floor(moneyPoins);
   }
 }
+}
 function moveDown() {
+  if (!isPaused) {
   if (gameLoop) {
     going2 = !going2
   } else if (ypos < downBound) {
@@ -633,6 +682,7 @@ function moveDown() {
     moneyPoins += 0.1;
     Math.floor(moneyPoins);
   }
+}
 }
 function goToCave() {
   xpos = 5030;
