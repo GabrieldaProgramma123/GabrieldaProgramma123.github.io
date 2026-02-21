@@ -282,7 +282,7 @@ function pause() {
   menu.style.left = "200px";
   menu.style.top = "5px";
   menu.innerHTML =
-    "Car:<br> 50,000 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
+    "Car:<br> 5,000 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
@@ -931,9 +931,9 @@ function shopMenu() {
       }
     }
     if (whattobuy === "Car") {
-      if (money >= 50000) {
+      if (money >= 5000) {
         car = true;
-        money -= 50000;
+        money -= 5000;
       } else {
         alert("Not Enough Money");
       }
@@ -942,6 +942,10 @@ function shopMenu() {
     alert("We're Closed!");
   }
 }
+/* Hehe..  Secret Coder Candy!
+What is questing?
+Play and find out!
+ */
 function sub() {
   // subscribed = true;
   // gdMode();
