@@ -59,8 +59,12 @@ var lootVal = 0;
 var isPaused = false;
 var strength = 1;
 var foeStrength = 10;
+var garyquests;
+var questMonitor = ["no", "no", "no"];
+var isBeaten = false;
 
 var kids = [];
+var GARYSTORAGE = [];
 var buttons = [];
 var buttonPoses = [];
 var inv = [];
@@ -160,6 +164,9 @@ const save = {
   isPaused: isPaused,
   strength: strength,
   foeStrength: foeStrength,
+  garyquests: garyquests,
+  questMonitor: questMonitor,
+  isBeaten: isBeaten
 };
 
 /* 
@@ -253,6 +260,7 @@ function animate() {
   if (health <= 0) {
     gameOver();
   }
+  // GARY
 }
 function pause() {
   isPaused = true;
@@ -394,6 +402,7 @@ function clock() {
         kids.splice(i, 1);
       }
     }
+
     document.getElementById("time").innerHTML =
       `TIME: ${hours}:${innerTimeString}<br>DAYS SPENT: ${days}`;
     for (let i = 0; i < baddies.length; i++) {
@@ -425,6 +434,9 @@ function clock() {
     }
   }
 }
+createTHENPC("Gary", 258, 474, "Gary likes questing...", "GARY");
+document.getElementById("GARY").style.left = `${GARYSTORAGE[0].xpos}px`;
+document.getElementById("GARY").style.top = `${GARYSTORAGE[0].ypos}px`;
 function interact() {
   for (let i = 0; i < baddies.length; i++) {
     if (
@@ -434,6 +446,12 @@ function interact() {
     ) {
       baddies[i].hp -= strength;
     }
+  }
+  if (
+    isWithin(GARYSTORAGE[0].xpos, xpos - 50, xpos + 50) &&
+    isWithin(GARYSTORAGE[0].ypos, ypos - 50, ypos + 50)
+  ) {
+    GARYSTORAGE[0].interact();
   }
 }
 function createCoin() {
@@ -491,6 +509,15 @@ function createEnemies(xpss, ypss, hlt, dmg) {
   baddies.push(foe);
   foeval++;
 }
+function createTHENPC(name, x, y, speak, id) {
+  const guy = new npc(name, x, y, speak, id);
+  GARYSTORAGE.push(guy);
+  guy.born();
+}
+function createNPC(name, x, y, speak, id) {
+  const guy = new npcNormal(name, x, y, speak, id);
+  guy.born();
+}
 function createBoss() {
   const foe = new Enemy(
     getRndInteger(150, 500),
@@ -536,10 +563,66 @@ function coin(xpos, ypos) {
   this.xpos = xpos;
   this.ypos = ypos;
 }
-function npc(name, xpos, ypos, dialogue) {
+// FOR GARY
+function npc(name, xpos, ypos, dialogue, npcid) {
   this.name = name;
   this.xpos = xpos;
   this.ypos = ypos;
+  this.form = document.createElement("button");
+  this.dialogue = dialogue;
+  this.romance = 0;
+  this.interact = function () {
+    garyquests = prompt(
+      "I like questing. Unfortunately I came to the wrong place to quest, and I'm kinda trapped. Luckily, I have some quests to get us out of here! Quest 1: Obtain 30 coins. Quest 2: Buy a Weapon or Complete any Quest. Quest 3: Live 30 days. Also, I'll need a car. P.S. The word to leave this land is: escape.",
+    );
+    if (garyquests === "Quest 1" && questMonitor[0] !== "done") {
+      if (money >= 30) {
+        inv.push("Quest 1 Token");
+        questMonitor[0] = "done";
+        alert("Aw thanks, here's a token!");
+      } else {
+        alert("Insufficient Questing, Gary Sad.");
+      }
+    }
+    if (garyquests === "Quest 2" && questMonitor[1] !== "done") {
+      if (inv.length !== 0) {
+        inv.push("Quest 2 Token");
+        questMonitor[1] = "done";
+        alert("Aw thanks, here's a token!");
+      } else {
+        alert("Insufficient Questing, Gary Sad.");
+      }
+    }
+    if (garyquests === "Quest 3" && questMonitor[2] !== "done") {
+      if (days >= 30) {
+        inv.push("Quest 3 Token");
+        questMonitor[2] = "done";
+        alert("Aw thanks, here's a token!");
+      } else {
+        alert("Insufficient Questing, Gary Sad.");
+      }
+    }
+    if (garyquests === "escape") {
+      if (questMonitor.indexOf("no") === -1 && car && !isBeaten) {
+      alert("You and Gary are chilling on a beach. The wind rustles through your hair as you look out onto clear blue waters. You live happily ever after. But then you come back for more questing! Congrats! You've beaten Questing Online! At least for now. There might be more added. Credits to Gabriel Bayker for making the game.");
+      isBeaten = true;
+      } else {
+        alert("You can't escape, or you've already escaped...")
+      }
+    }
+  };
+  this.born = function () {
+    document.body.appendChild(this.form);
+    this.form.id = npcid;
+    this.form.innerHTML = "GARY!!";
+  };
+}
+// for anyone else
+function npcNormal(name, xpos, ypos, dialogue, npcid) {
+  this.name = name;
+  this.xpos = xpos;
+  this.ypos = ypos;
+  this.form = document.createElement("button");
   this.dialogue = dialogue;
   this.romance = 0;
   this.interact = function () {
@@ -552,6 +635,11 @@ function npc(name, xpos, ypos, dialogue) {
       birth();
       // birth params = mother, father
     }
+  };
+  this.born = function () {
+    document.body.appendChild(this.form);
+    this.form.classList.add("npc");
+    this.form.id = npcid;
   };
 }
 function Enemy(xps, yps, hlth, baseDmg) {
@@ -652,6 +740,9 @@ function saveProgress() {
   save.interact1 = interact1;
   save.strength = strength;
   save.foeStrength = foeStrength;
+  save.garyquests = garyquests;
+  save.questMonitor = questMonitor;
+  save.isBeaten = isBeaten
   localStorage.setItem("saves", JSON.stringify(save));
 }
 function loadSave() {
@@ -883,171 +974,3 @@ function gameOver() {
   clearInterval(updater);
   document.body.style.backgroundImage = "url(Drawing.jpeg)";
 }
-/*
-html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questing Online</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js"></script>
-</head>
-<body>
-    <div>
-<button onclick="moveRight()" class="items">RIGHT<br>RIGHT</button>
-<br>
-<br>
-<button onclick="moveLeft()" class="items">LEFT<br>LEFT</button>
-<br>
-<br>
-<button onclick="moveUp()" class="items">UP<br>UP</button>
-<br>
-<br>
-<button onclick="moveDown()" class="items">DOWN<br>DOWN</button>
-<br>
-<br>
-<button onclick="saveProgress()" class="items">SAVE</button>
-<br>
-<button onclick="loadSave()" class="items">LOAD</button>
-<br>
-<button onclick="interact()" class="items">ATTACK<br>ATTACK</button>
-<br>
-<br>
-<button onclick="openInv()" class="items">open inventory</button>
-<br>
-<div id="money" class="items"></div>
-<br>
-<br>
-<div class="items" id="points"></div>
-<br>
-<div class="items" id="healthy"></div>
-<br>
-<div class="items" id="time"></div>
-<br>
-<br>
-<div class="items" id="loaned"></div>  
-<div class="lilMenu">Car:<br> 50,000 coins<br>Health Potion:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!</div>
-<br>
-</div>
-<div class="tallDiv" id="dayNight"></div>
-<button id="main" class="thing" onclick="tickle()">0</button>
-<div class="shop" id="buy"><br>CAR 4 SALE<br>SHOP SWORDS</div>
-<div class="buzz" id="work"><button id="subbing" onclick="sub()" class="items2">WORK</button><br>WORK: Business BlahBlah</div>
-<div class="house1" id="home1"><br><br><br>HOUSE</div>
-<div class="house2" id="home2">HOME</div>
-<div class="caveMark"><br><br><br><br><br>CAVE CAVE HERE</div>
-<div class="houseMark"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>BACK|O|BACK</div>
-<div class="bed">bed</div>
-<div class="table">table</div>
-<div class="caveEnter" id="danger">dark cave</div>
-</body>
-</html>
-css
- body {
-  background-image: url(download.png);
-  color: white;
-} .thing {
-  position: absolute;
-  color: white;
-  border-color: white;
-  background-color: red;
-  left: 150px;
-  top: 20px;
-} .items {
-  position: fixed;
-  background-color: red;
-  color: white;
-  border-color: white;
-  z-index: 2;
-} .items2 {
-  position: absolute;
-  background-color: red;
-  color: white;
-  border-color: white;
-  z-index: 2;
-} .caveEnter {
-  position: absolute;
-  background-color: black;
-  left: 500px;
-  top: 170px;
-} .shop {
-  position: absolute;
-  background-color: #00006480;
-  border: 5px solid black;
-  left: 250px;
-  top: 300px;
-} .lilMenu {
-  position: fixed;
-  background-color: red;
-  color: white;
-  border-color: white;
-  size: 10px;
-  z-index: 2;
-} .buzz {
-  position: absolute;
-  background-color: #00006480;
-  border: 5px solid black;
-  left: 760px;
-  top: 235px;
-} .house1 {
-  position: absolute;
-  background-color: #00006480;
-  border: 5px solid black;
-  left: 500px;
-  top: 400px;
-} .house2 {
-  position: absolute;
-  background-color: #00006480;
-  left: 232px;
-  top: 422px;
-} .tallDiv {
-  height: 40000px;
-  width: 40000px;
-  position: absolute;
-  z-index: 1;
-  top: 0px;
-} .caveMark {
-  position: absolute;
-  left: 5000px;
-  top: 20px;
-  background-color: #00006480;
-  border: 5px solid;
-} .houseMark {
-  position: absolute;
-  left: 7000px;
-  top: 7000px;
-  width: 500px;
-  background-color: #43ff41c2;
-  border: 5px solid;
-  z-index: 1;
-} .coins {
-  background-color: yellow;
-  position: absolute;
-  top: 9000px;
-} .bed {
-  position: absolute;
-  left: 7441px;
-  top: 7459px;
-  width: 18px;
-  height: 18px;
-  background-color: blue;
-  z-index: 2;
-} .kids {
-  position: absolute;
-} .table {
-  position: absolute;
-  left: 7423px;
-  top: 7190px;
-  z-index: 2;
-  width: 18px;
-  height: 18px;
-  background-color: brown;
-} .foes {
-  width: 18px;
-  height: 18px;
-  background-color: white;
-  position: absolute;
-}
-  */
