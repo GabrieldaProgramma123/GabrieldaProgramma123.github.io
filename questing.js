@@ -606,8 +606,10 @@ function npc(name, xpos, ypos, dialogue, npcid) {
       if (questMonitor.indexOf("no") === -1 && car && !isBeaten) {
       alert("You and Gary are chilling on a beach. The wind rustles through your hair as you look out onto clear blue waters. You live happily ever after. But then you come back for more questing! Congrats! You've beaten Questing Online! At least for now. There might be more added. Credits to Gabriel Bayker for making the game.");
       isBeaten = true;
+      } else if(isBeaten) {
+        alert("You've already escaped!")
       } else {
-        alert("You can't escape, or you've already escaped...")
+        alert("You can't escape...")
       }
     }
   };
