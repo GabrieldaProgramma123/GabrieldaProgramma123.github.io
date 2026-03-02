@@ -83,7 +83,6 @@ body {
   top: 384px;
   background-color: #43ff41c2;
   border: 5px solid;
-  z-index: 1;
 } .coins {
   background-color: yellow;
   position: absolute;

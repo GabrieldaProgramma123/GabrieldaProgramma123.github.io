@@ -44,7 +44,8 @@ var outerTime = 0;
 var innerTimeString;
 var hours = 8;
 var pm = false;
-var isTimeSwitched = false;
+// isTimeSwitched was used previously to prevent multiple toggles at 12, but the
+// clock logic below has been simplified so the extra state is no longer needed.
 var isEnemyMade = false;
 var isDay = true;
 var days = 0;
@@ -310,6 +311,11 @@ const invFriends = [
   "Ryandom",
   "Deighseigh",
   "Deighzeigh",
+  "Lily",
+  "Alyzabeth",
+  "John",
+  "Kitty",
+  "Rawrie",
 ];
 const baddies = [];
 const save = {
@@ -359,7 +365,6 @@ const save = {
   innerTimeString: innerTimeString,
   hours: hours,
   pm: pm,
-  isTimeSwitched: isTimeSwitched,
   isEnemyMade: isEnemyMade,
   isDay: isDay,
   days: days,
@@ -558,6 +563,13 @@ function clock() {
     if (outerTime >= 60) {
       outerTime = 0;
       hours++;
+      // perform wrap and AM/PM toggle at the moment of hour increment
+      if (hours > 12) {
+        hours = 1;
+      }
+      if (hours === 12) {
+        pm = !pm;
+      }
       createEnemies(
         getRndInteger(150, 500),
         getRndInteger(500, 1000),
@@ -565,16 +577,8 @@ function clock() {
         10,
       );
     }
-    if (hours > 12) {
-      hours = 1;
-      isTimeSwitched = false;
-    }
-    if (hours >= 12) {
-      if (!isTimeSwitched) {
-        pm = !pm;
-      }
-      isTimeSwitched = true;
-    }
+    // previous standalone hour logic removed, no repeated toggles
+
     if (
       (hours >= 9 && hours !== 12 && pm) ||
       (hours < 8 && !pm) ||
@@ -945,7 +949,6 @@ function saveProgress() {
   save.innerTimeString = innerTimeString;
   save.hours = hours;
   save.pm = pm;
-  save.isTimeSwitched = isTimeSwitched;
   save.isEnemyMade = isEnemyMade;
   save.isDay = isDay;
   save.days = days;

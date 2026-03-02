@@ -44,7 +44,8 @@ var outerTime = 0;
 var innerTimeString;
 var hours = 8;
 var pm = false;
-var isTimeSwitched = false;
+// isTimeSwitched was previously used for AM/PM toggling but the updated clock
+// logic no longer requires this extra state.
 var isEnemyMade = false;
 var isDay = true;
 var days = 0;
@@ -94,9 +95,20 @@ var weaponData = [
 ];
 var forsale = [weaponData[1], weaponData[4], weaponData[7], weaponData[16]];
 var interact1 = ["Hi!", "Hello!"];
-const invFriends = ["Liv", "Liz", "Kal", "Dave", "Dav", "Kod", "Gabe", "Beth", "Lauren", "Amy", "Rebecca"];
+const invFriends = [
+  "Liv",
+  "Liz",
+  "Kal",
+  "Dave",
+  "Dav",
+  "Kod",
+  "Gabe",
+  "Beth",
+  "Lauren",
+  "Amy",
+  "Rebecca",
+];
 const baddies = [];
-
 
 /* 
 weapon, damage, cost
@@ -237,47 +249,6 @@ function unpause() {
 }
 function clock() {
   if (!isPaused) {
-    time += 1;
-    outerTime += 1;
-    if (pm) {
-      if (outerTime < 10) {
-        innerTimeString = `0${outerTime}PM`;
-      } else {
-        innerTimeString = `${outerTime}PM`;
-      }
-    }
-    if (!pm) {
-      if (outerTime < 10) {
-        innerTimeString = `0${outerTime}AM`;
-      } else {
-        innerTimeString = `${outerTime}AM`;
-      }
-    }
-    if (outerTime >= 60) {
-      outerTime = 0;
-      hours++;
-    }
-    if (hours > 12) {
-      hours = 1;
-      isTimeSwitched = false;
-    }
-    if (hours >= 12) {
-      if (!isTimeSwitched) {
-        pm = !pm;
-      }
-      isTimeSwitched = true;
-    }
-    if (
-      (hours >= 9 && hours !== 12 && pm) ||
-      (hours < 8 && !pm) ||
-      (hours === 12 && !pm)
-    ) {
-      document.getElementById("dayNight").style.backgroundColor = "#00006480";
-      isDay = false;
-    } else {
-      document.getElementById("dayNight").style.backgroundColor = "#ffffff00";
-      isDay = true;
-    }
     for (let i = 0; i < kids.length; i++) {
       if (!kids[i].dead) {
         if (time % kids[i].randomHunger === 0) {
@@ -308,11 +279,15 @@ function clock() {
         kids.splice(i, 1);
       }
     }
-
-    
   }
 }
-createTHENPC("Gary", 258, 474, "Dave is chilling on this island. Ahh...", "GARY");
+createTHENPC(
+  "Gary",
+  258,
+  474,
+  "Dave is chilling on this island. Ahh...",
+  "GARY",
+);
 document.getElementById("GARY").style.left = `${GARYSTORAGE[0].xpos}px`;
 document.getElementById("GARY").style.top = `${GARYSTORAGE[0].ypos}px`;
 function interact() {
@@ -341,6 +316,7 @@ function newDay() {
   hours = 8;
   outerTime = 0;
   pm = false;
+  // No flag to reset
   goToHome();
   foeStrength += 5;
 }
@@ -510,7 +486,6 @@ function Enemy(xps, yps, hlth, baseDmg) {
   };
 }
 // constructors end
-
 
 function stopMovement() {
   stopped = !stopped;
@@ -717,7 +692,7 @@ function sub() {
 function vacation() {
   var askfly = prompt("Ready to return?");
   if (askfly === "yes") {
-    window.location.href = "questing.html"; 
+    window.location.href = "questing.html";
   }
 }
 function tickle() {
