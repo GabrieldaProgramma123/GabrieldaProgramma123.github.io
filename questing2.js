@@ -94,297 +94,9 @@ var weaponData = [
 ];
 var forsale = [weaponData[1], weaponData[4], weaponData[7], weaponData[16]];
 var interact1 = ["Hi!", "Hello!"];
-const invFriends = [
-  "Liv",
-  "Liz",
-  "Kal",
-  "Dave",
-  "Dav",
-  "Kod",
-  "Gabe",
-  "Beth",
-  "Lauren",
-  "Amy",
-  "Rebecca",
-  "David",
-  "Anthony",
-  "Mark",
-  "Candy",
-  "Bethany",
-  "Eliza",
-  "Elizabeth",
-  "Laurie",
-  // CAITLIN = C SPELLINGS
-
-  "Caitlin",
-  "Catelin",
-  "Caytlin",
-  "Caytelin",
-  "Catlin",
-  "Caetlin",
-  "Caitelin",
-  "Cayetlin",
-  "Caitlan",
-  "Catelan",
-  "Caytlan",
-  "Caytelan",
-  "Catlan",
-  "Caetlan",
-  "Caitelan",
-  "Cayetlan",
-  "Caitlyn",
-  "Catelyn",
-  "Caytlyn",
-  "Caytelyn",
-  "Catlyn",
-  "Caetlyn",
-  "Caitelyn",
-  "Cayetlyn",
-  "Caitlynn",
-  "Catelynn",
-  "Caytlynn",
-  "Caytelynn",
-  "Catlynn",
-  "Caetlynn",
-  "Caitelynn",
-  "Cayetlynn",
-  "Caitlynne",
-  "Catelynne",
-  "Caytlynne",
-  "Caytelynne",
-  "Catlynne",
-  "Caetlynne",
-  "Caitelynne",
-  "Cayetlynne",
-  "Caitlind",
-  "Catelind",
-  "Caytlind",
-  "Caytelind",
-  "Catlind",
-  "Caetlind",
-  "Caitelind",
-  "Cayetlind",
-  "Caitland",
-  "Cateland",
-  "Caytland",
-  "Cayteland",
-  "Catland",
-  "Caetland",
-  "Caiteland",
-  "Cayetland",
-  "Caitlinn",
-  "Catelinn",
-  "Caytlinn",
-  "Caytelinn",
-  "Catlinn",
-  "Caetlinn",
-  "Caitelinn",
-  "Cayetlinn",
-  "Caitlinne",
-  "Catelinne",
-  "Caytlinne",
-  "Caytelinne",
-  "Catlinne",
-  "Caetlinne",
-  "Caitelinne",
-  "Cayetlinne",
-
-  // 'K' Spellings
-  "Kaitlin",
-  "Katelin",
-  "Kaytlin",
-  "Kaytelin",
-  "Katlin",
-  "Kaetlin",
-  "Keightlin",
-  "Kaitelin",
-  "Kayetlin",
-  "Kaitlan",
-  "Katelan",
-  "Kaytlan",
-  "Kaytelan",
-  "Katlan",
-  "Kaetlan",
-  "Keightlan",
-  "Kaitelan",
-  "Kayetlan",
-  "Kaitlyn",
-  "Katelyn",
-  "Kaytlyn",
-  "Kaytelyn",
-  "Katlyn",
-  "Kaetlyn",
-  "Keightlyn",
-  "Kaitelyn",
-  "Kayetlyn",
-  "Kaitlynn",
-  "Katelynn",
-  "Kaytlynn",
-  "Kaytelynn",
-  "Katlynn",
-  "Kaetlynn",
-  "Keightlynn",
-  "Kaitelynn",
-  "Kayetlynn",
-  "Kaitlynne",
-  "Katelynne",
-  "Kaytlynne",
-  "Kaytelynne",
-  "Katlynne",
-  "Kaetlynne",
-  "Keightlynne",
-  "Kaitelynne",
-  "Kayetlynne",
-  "Kaitlind",
-  "Katelind",
-  "Kaytlind",
-  "Kaytelind",
-  "Katlind",
-  "Kaetlind",
-  "Keightlind",
-  "Kaitelind",
-  "Kayetlind",
-  "Kaitland",
-  "Kateland",
-  "Kaytland",
-  "Kayteland",
-  "Katland",
-  "Kaetland",
-  "Keightland",
-  "Kaiteland",
-  "Kayetland",
-  "Kaitlinn",
-  "Katelinn",
-  "Kaytlinn",
-  "Kaytelinn",
-  "Katlinn",
-  "Kaetlinn",
-  "Keightlinn",
-  "Kaitelinn",
-  "Kayetlinn",
-  "Kaitlinne",
-  "Katelinne",
-  "Kaytlinne",
-  "Kaytelinne",
-  "Katlinne",
-  "Kaetlinne",
-  "Keightlinne",
-  "Kaitelinne",
-  "Kayetlinne",
-  // WILD
-  "KVIIIlyn",
-  "Q8VIIILyn",
-  // normal names again
-  "Sydnee",
-  "Sidney",
-  "Sydnei",
-  "Bailey",
-  "Beighleigh",
-  "Beighley",
-  "Beighblade",
-  "Beighbleighde",
-  "Beyleigh",
-  "Baileigh",
-  "Inshtagramme",
-  "Youghtuwbbè",
-  "Natalie",
-  "Nataleigh",
-  "Natyleigh",
-  "Nadylie",
-  "Natylie",
-  "Naddaleigh",
-  "Nadaleigh",
-  "Wifey",
-  "Amanda",
-  "Niceleigh",
-  "Dunn",
-  "Andrea",
-  "Golden",
-  "Goldie",
-  "Arty",
-  "Bow",
-  "Kim",
-  "Kimme",
-  "Rabecca",
-  "Ryan",
-  "Ryandom",
-  "Deighseigh",
-  "Deighzeigh",
-];
+const invFriends = ["Liv", "Liz", "Kal", "Dave", "Dav", "Kod", "Gabe", "Beth", "Lauren", "Amy", "Rebecca"];
 const baddies = [];
-const save = {
-  xpos: xpos,
-  ypos: ypos,
-  canmove: canmove,
-  onSurface: onSurface,
-  whattobuy: whattobuy,
-  equippedWeapon: equippedWeapon,
-  money: money,
-  moneyPoins: moneyPoins,
-  subscribed: subscribed,
-  anger: anger,
-  xp: xp,
-  health: health,
-  leftBound: leftBound,
-  rightBound: rightBound,
-  upBound: upBound,
-  downBound: downBound,
-  gameLoop: gameLoop,
-  atHome: atHome,
-  detrimVal: detrimVal,
-  going: going,
-  going2: going2,
-  stopped: stopped,
-  initJumpY: initJumpY,
-  initJumpX: initJumpX,
-  jumpY: jumpY,
-  jumpX: jumpX,
-  jumping: jumping,
-  velocityY: velocityY,
-  gravity: gravity,
-  jumpStrength: jumpStrength,
-  loading: loading,
-  randNum: randNum,
-  buttonVar: buttonVar,
-  buttonLet: buttonLet,
-  idstring: idstring,
-  kidstring: kidstring,
-  foestring: foestring,
-  foeval: foeval,
-  kidval: kidval,
-  car: car,
-  forsaleVal: forsaleVal,
-  time: time,
-  outerTime: outerTime,
-  innerTimeString: innerTimeString,
-  hours: hours,
-  pm: pm,
-  isTimeSwitched: isTimeSwitched,
-  isEnemyMade: isEnemyMade,
-  isDay: isDay,
-  days: days,
-  debt: debt,
-  costNum: costNum,
-  childName: childName,
-  childGender: childGender,
-  xxyy: xxyy,
-  charisma: charisma,
-  interacting: interacting,
-  lootVal: lootVal,
-  kids: kids,
-  buttons: buttons,
-  buttonPoses: buttonPoses,
-  inv: inv,
-  weaponData: weaponData,
-  forsale: forsale,
-  interact1: interact1,
-  isPaused: isPaused,
-  strength: strength,
-  foeStrength: foeStrength,
-  garyquests: garyquests,
-  questMonitor: questMonitor,
-  isBeaten: isBeaten,
-};
+
 
 /* 
 weapon, damage, cost
@@ -509,20 +221,6 @@ function pause() {
   unpaused.style.left = "330px";
   unpaused.style.top = "5px";
   unpaused.style.zIndex = "2";
-  savepush.id = "savid";
-  savepush.classList.add("items");
-  savepush.setAttribute("onclick", "saveProgress()");
-  savepush.innerHTML = "SAVE";
-  document.body.append(savepush);
-  savepush.style.left = "330px";
-  savepush.style.top = "30px";
-  loadpush.id = "loadid";
-  loadpush.classList.add("items");
-  document.body.append(loadpush);
-  loadpush.style.left = "330px";
-  loadpush.style.top = "50px";
-  loadpush.setAttribute("onclick", "loadSave()");
-  loadpush.innerHTML = "LOAD";
 }
 function unpause() {
   isPaused = false;
@@ -558,12 +256,6 @@ function clock() {
     if (outerTime >= 60) {
       outerTime = 0;
       hours++;
-      createEnemies(
-        getRndInteger(150, 500),
-        getRndInteger(500, 1000),
-        getRndInteger(5, foeStrength),
-        10,
-      );
     }
     if (hours > 12) {
       hours = 1;
@@ -585,9 +277,6 @@ function clock() {
     } else {
       document.getElementById("dayNight").style.backgroundColor = "#ffffff00";
       isDay = true;
-    }
-    if (hours === 2 && !pm) {
-      sleep("candid");
     }
     for (let i = 0; i < kids.length; i++) {
       if (!kids[i].dead) {
@@ -620,50 +309,13 @@ function clock() {
       }
     }
 
-    document.getElementById("time").innerHTML =
-      `TIME: ${hours}:${innerTimeString}<br>DAYS SPENT: ${days}`;
-    for (let i = 0; i < baddies.length; i++) {
-      if (!atHome && !baddies[i].dead) {
-        if (
-          isWithin(baddies[i].xps, xpos - 20, xpos + 20) &&
-          isWithin(baddies[i].yps, ypos - 20, ypos + 20)
-        ) {
-          baddies[i].onCollision();
-        }
-        if (ypos > 700) {
-          if (time % 2 === 0) {
-            baddies[i].chase();
-            if (document.getElementById(`RU-${i}`) !== null) {
-              document.getElementById(`RU-${i}`).style.left =
-                `${baddies[i].xps}px`;
-              document.getElementById(`RU-${i}`).style.top =
-                `${baddies[i].yps}px`;
-            }
-          }
-        }
-        if (document.getElementById(`RU-${i}`) !== null) {
-          document.getElementById(`RU-${i}`).innerHTML = baddies[i].hp;
-        }
-        if (baddies[i].hp <= 0) {
-          baddies[i].die();
-        }
-      }
-    }
+    
   }
 }
-createTHENPC("Gary", 258, 474, "Gary likes questing...", "GARY");
+createTHENPC("Gary", 258, 474, "Dave is chilling on this island. Ahh...", "GARY");
 document.getElementById("GARY").style.left = `${GARYSTORAGE[0].xpos}px`;
 document.getElementById("GARY").style.top = `${GARYSTORAGE[0].ypos}px`;
 function interact() {
-  for (let i = 0; i < baddies.length; i++) {
-    if (
-      isWithin(baddies[i].xps, xpos - 50, xpos + 50) &&
-      isWithin(baddies[i].yps, ypos - 50, ypos + 50) &&
-      ypos > 700
-    ) {
-      baddies[i].hp -= strength;
-    }
-  }
   if (
     isWithin(GARYSTORAGE[0].xpos, xpos - 50, xpos + 50) &&
     isWithin(GARYSTORAGE[0].ypos, ypos - 50, ypos + 50)
@@ -789,53 +441,12 @@ function npc(name, xpos, ypos, dialogue, npcid) {
   this.dialogue = dialogue;
   this.romance = 0;
   this.interact = function () {
-    garyquests = prompt(
-      "I like questing. Unfortunately I came to the wrong place to quest, and I'm kinda trapped. Luckily, I have some quests to get us out of here! Quest 1: Obtain 30 coins. Quest 2: Buy a Weapon or Complete any Quest. Quest 3: Live 30 days. Also, I'll need a car. P.S. The word to leave this land is: escape.",
-    );
-    if (garyquests === "Quest 1" && questMonitor[0] !== "done") {
-      if (money >= 30) {
-        inv.push("Quest 1 Token");
-        questMonitor[0] = "done";
-        alert("Aw thanks, here's a token!");
-      } else {
-        alert("Insufficient Questing, Gary Sad.");
-      }
-    }
-    if (garyquests === "Quest 2" && questMonitor[1] !== "done") {
-      if (inv.length !== 0) {
-        inv.push("Quest 2 Token");
-        questMonitor[1] = "done";
-        alert("Aw thanks, here's a token!");
-      } else {
-        alert("Insufficient Questing, Gary Sad.");
-      }
-    }
-    if (garyquests === "Quest 3" && questMonitor[2] !== "done") {
-      if (days >= 30) {
-        inv.push("Quest 3 Token");
-        questMonitor[2] = "done";
-        alert("Aw thanks, here's a token!");
-      } else {
-        alert("Insufficient Questing, Gary Sad.");
-      }
-    }
-    if (garyquests === "escape") {
-      if (questMonitor.indexOf("no") === -1 && car && !isBeaten) {
-        alert(
-          "You and Gary are chilling on a beach. The wind rustles through your hair as you look out onto clear blue waters. You live happily ever after. But then you come back for more questing! Congrats! You've beaten Questing Online! At least for now. There might be more added. Credits to Gabriel Bayker for making the game.",
-        );
-        isBeaten = true;
-      } else if (isBeaten) {
-        alert("You've already escaped!");
-      } else {
-        alert("You can't escape...");
-      }
-    }
+    alert(dialogue);
   };
   this.born = function () {
     document.body.appendChild(this.form);
     this.form.id = npcid;
-    this.form.innerHTML = "GARY!!";
+    this.form.innerHTML = "DAVE!!";
   };
 }
 // for anyone else
@@ -899,89 +510,8 @@ function Enemy(xps, yps, hlth, baseDmg) {
   };
 }
 // constructors end
-function saveProgress() {
-  save.xpos = xpos;
-  save.ypos = ypos;
-  save.canmove = canmove;
-  save.onSurface = onSurface;
-  save.whattobuy = whattobuy;
-  save.equippedWeapon = equippedWeapon;
-  save.money = money;
-  save.moneyPoins = moneyPoins;
-  save.subscribed = subscribed;
-  save.anger = anger;
-  save.xp = xp;
-  save.health = health;
-  save.leftBound = leftBound;
-  save.rightBound = rightBound;
-  save.upBound = upBound;
-  save.downBound = downBound;
-  save.atHome = atHome;
-  save.detrimVal = detrimVal;
-  save.going = going;
-  save.going2 = going2;
-  save.stopped = stopped;
-  save.initJumpY = initJumpY;
-  save.initJumpX = initJumpX;
-  save.jumpY = jumpY;
-  save.jumpX = jumpX;
-  save.jumping = jumping;
-  save.velocityY = velocityY;
-  save.gravity = gravity;
-  save.jumpStrength = jumpStrength;
-  save.loading = loading;
-  save.randNum = randNum;
-  save.buttonVar = buttonVar;
-  save.buttonLet = buttonLet;
-  save.idstring = idstring;
-  save.kidstring = kidstring;
-  save.foestring = foestring;
-  save.foeval = 0;
-  save.kidval = kidval;
-  save.car = car;
-  save.forsaleVal = forsaleVal;
-  save.time = time;
-  save.outerTime = outerTime;
-  save.innerTimeString = innerTimeString;
-  save.hours = hours;
-  save.pm = pm;
-  save.isTimeSwitched = isTimeSwitched;
-  save.isEnemyMade = isEnemyMade;
-  save.isDay = isDay;
-  save.days = days;
-  save.debt = debt;
-  save.costNum = costNum;
-  save.childName = childName;
-  save.childGender = childGender;
-  save.xxyy = xxyy;
-  save.charisma = charisma;
-  save.interacting = interacting;
-  save.lootVal = lootVal;
-  save.inv = inv;
-  save.interact1 = interact1;
-  save.strength = strength;
-  save.foeStrength = foeStrength;
-  save.garyquests = garyquests;
-  save.questMonitor = questMonitor;
-  save.isBeaten = isBeaten;
-  localStorage.setItem("saves", JSON.stringify(save));
-}
-function loadSave() {
-  const load = JSON.parse(localStorage.getItem("saves"));
-  if (!load) return;
 
-  load.foeval = 0;
 
-  for (let x in load) {
-    window[x] = load[x];
-  }
-  for (let i = 0; i < baddies.length; i++) {
-    baddies.pop();
-  }
-  isPaused = true;
-  document.getElementById("dayNight").style.backgroundColor =
-    "rgba(0, 0, 0, 0.50)";
-}
 function stopMovement() {
   stopped = !stopped;
 }
@@ -1111,7 +641,7 @@ function goHome() {
   rightBound = 4000;
   upBound = 20;
   downBound = 4000;
-  document.body.style.backgroundImage = "url(download.png)";
+  document.body.style.backgroundImage = "url(island.png)";
   gameLoop = false;
   atHome = false;
 }
@@ -1185,19 +715,9 @@ function sub() {
   // unused
 }
 function vacation() {
-  var askfly = prompt("Ready to fly? 25 coins per trip!");
+  var askfly = prompt("Ready to return?");
   if (askfly === "yes") {
-    if (money >= 25) {
-      alert(
-        "Now Saving. When you return, check your inventory for something sweet.",
-      );
-      money -= 25;
-      inv.push(invFriends[getRndInteger(0, invFriends.length - 1)]);
-      saveProgress();
-      window.location.href = "questing2.html";
-    } else {
-      alert("You don't have enough money to fly.");
-    }
+    window.location.href = "questing.html"; 
   }
 }
 function tickle() {
