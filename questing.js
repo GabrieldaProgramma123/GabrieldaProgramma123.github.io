@@ -69,6 +69,7 @@ var GARYSTORAGE = [];
 var buttons = [];
 var buttonPoses = [];
 var inv = [];
+var friendsInv = [];
 var weaponData = [
   "dummy",
   "Rusty Blade",
@@ -389,6 +390,7 @@ const save = {
   garyquests: garyquests,
   questMonitor: questMonitor,
   isBeaten: isBeaten,
+  friendsInv: friendsInv,
 };
 
 /* 
@@ -504,7 +506,7 @@ function pause() {
   menu.style.left = "200px";
   menu.style.top = "5px";
   menu.innerHTML =
-    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
+    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
@@ -577,7 +579,6 @@ function clock() {
         10,
       );
     }
-    // previous standalone hour logic removed, no repeated toggles
 
     if (
       (hours >= 9 && hours !== 12 && pm) ||
@@ -967,6 +968,7 @@ function saveProgress() {
   save.garyquests = garyquests;
   save.questMonitor = questMonitor;
   save.isBeaten = isBeaten;
+  save.friendsInv = friendsInv;
   localStorage.setItem("saves", JSON.stringify(save));
 }
 function loadSave() {
@@ -1129,12 +1131,12 @@ function gdMode() {
   document.body.style.backgroundImage = "url(level.png)";
 }
 function openInv() {
-  alert(inv);
+  alert(inv + friendsInv);
 }
 function shopMenu() {
   if (isDay) {
     whattobuy = prompt(
-      `Stuff Available: Car, Health Potion, Damage Upgrade and These Items: ${forsale}`,
+      `Stuff Available: Car, Health Potion, Damage Upgrade, InvFriend Removal and These Items: ${forsale}`,
     );
     for (let i = 0; i < forsale.length; i++) {
       if (whattobuy === forsale[i]) {
@@ -1174,6 +1176,28 @@ function shopMenu() {
         alert("Not Enough Money");
       }
     }
+    if (whattobuy === "InvFriend Removal") {
+      if (money >= 30 && isBeaten) {
+        var whichOne = prompt(
+          "Which InvFriend would you like to remove? InvFriends: " + friendsInv,
+        );
+        if (whichOne !== null) {
+          const index = friendsInv.indexOf(whichOne);
+          if (index > -1) {
+            friendsInv.splice(index, 1);
+            alert("InvFriend removed!");
+          } else {
+            alert("InvFriend not found in your inventory.");
+          }
+          money -= 30;
+        } else {
+          alert("Come another time then.");
+        }
+      } else {
+        alert("You either don't have enough money, or you haven't escaped.");
+      }
+    }
+    //InvFriend Removal
   } else {
     alert("We're Closed!");
   }
@@ -1191,13 +1215,22 @@ function vacation() {
   var askfly = prompt("Ready to fly? 25 coins per trip!");
   if (askfly === "yes") {
     if (money >= 25) {
-      alert(
-        "Now Saving. When you return, check your inventory for something sweet.",
-      );
-      money -= 25;
-      inv.push(invFriends[getRndInteger(0, invFriends.length - 1)]);
-      saveProgress();
-      window.location.href = "questing2.html";
+      if (friendsInv.length <= 10) {
+        alert(
+          "Now Saving. When you return, check your inventory for something sweet.",
+        );
+        money -= 25;
+        friendsInv.push(invFriends[getRndInteger(0, invFriends.length - 1)]);
+        saveProgress();
+        window.location.href = "questing2.html";
+      } else {
+        alert(
+          "Now Saving. You currently have a lot of InvFriends, so no more.",
+        );
+        money -= 25;
+        saveProgress();
+        window.location.href = "questing2.html";
+      }
     } else {
       alert("You don't have enough money to fly.");
     }
