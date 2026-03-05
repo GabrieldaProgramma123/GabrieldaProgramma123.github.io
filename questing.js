@@ -400,6 +400,9 @@ weapons 1 - 5 are basic
 item 7 is not a weapon, so it has a damage of "NA"
 */
 
+function start() {
+  // document.getElementById("bagkGround").play();
+}
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -827,9 +830,12 @@ function npc(name, xpos, ypos, dialogue, npcid) {
     if (garyquests === "escape") {
       if (questMonitor.indexOf("no") === -1 && car && !isBeaten) {
         alert(
-          "You and Gary are chilling on a beach. The wind rustles through your hair as you look out onto clear blue waters. You live happily ever after. But then you come back for more questing! Congrats! You've beaten Questing Online! At least for now. There might be more added. Credits to Gabriel Bayker for making the game.",
+          "You and Gary are chilling on a beach. The wind rustles through your hair as you look out onto clear blue waters. You live happily ever after. But then you come back for more questing! Congrats! You've beaten Questing Online! At least for now. There might be more added. ",
         );
+        alert("Now Saving.");
         isBeaten = true;
+        saveProgress();
+        window.location.href = "questingcredits.html"
       } else if (isBeaten) {
         alert("You've already escaped!");
       } else {
@@ -1136,7 +1142,7 @@ function openInv() {
 function shopMenu() {
   if (isDay) {
     whattobuy = prompt(
-      `Stuff Available: Car, Health Potion, Damage Upgrade, InvFriend Removal and These Items: ${forsale}`,
+      `Stuff Available: Car, Health Potion, Damage Upgrade, InvFriend Removal and These Items: ${forsale}. We also have a free copy of Questing Online's Credits.`,
     );
     for (let i = 0; i < forsale.length; i++) {
       if (whattobuy === forsale[i]) {
@@ -1197,10 +1203,12 @@ function shopMenu() {
         alert("You either don't have enough money, or you haven't escaped.");
       }
     }
-    //InvFriend Removal
-  } else {
-    alert("We're Closed!");
+    if (whattobuy === "Credits") {
+      window.location.href = "questingcredits.html";
   }
+} else {
+    alert("We're Closed!");
+}
 }
 /* Hehe..  Secret Coder Candy!
 What is questing?

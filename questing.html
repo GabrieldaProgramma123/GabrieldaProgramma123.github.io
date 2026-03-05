@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questing Online</title>
+    <audio id="bagkGround" loop>
+  <source src="A Magical Instrumental.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
     <link rel="stylesheet" href="questing.css">
 </head>
-<body>
+<body onload="document.getElementById('bagkGround').play()">
     <div>
 <button onclick="moveRight()" class="items">RIGHT<br>RIGHT</button>
 <br>
