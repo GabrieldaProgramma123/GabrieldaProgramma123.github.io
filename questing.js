@@ -1210,7 +1210,7 @@ function shopMenu() {
         alert("You haven't escaped!");
       }
     }
-    if (whattobuy === uuddlrlrbas) {
+    if (whattobuy === "uuddlrlrbas") {
       alert("Konami Code entered. Redirecting to credits.");
       window.location.href = "questingcredits.html";
     }

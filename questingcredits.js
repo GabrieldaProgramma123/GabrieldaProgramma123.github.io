@@ -61,8 +61,8 @@ let scrolled = 500;
 function start() {
   makeCredits();
   setInterval(makeCredits, 3000);
-  document.getElementById('bagkGround').play();
 }
+start();
 function makeCredits() {
   var credit = new Credit();
   document.getElementById("rolling").appendChild(credit.form);
