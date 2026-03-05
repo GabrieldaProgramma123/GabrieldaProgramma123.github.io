@@ -835,7 +835,7 @@ function npc(name, xpos, ypos, dialogue, npcid) {
         alert("Now Saving.");
         isBeaten = true;
         saveProgress();
-        window.location.href = "questingcredits.html"
+        window.location.href = "questingcredits.html";
       } else if (isBeaten) {
         alert("You've already escaped!");
       } else {
@@ -1204,11 +1204,19 @@ function shopMenu() {
       }
     }
     if (whattobuy === "Credits") {
+      if (isBeaten) {
+        window.location.href = "questingcredits.html";
+      } else {
+        alert("You haven't escaped!");
+      }
+    }
+    if (whattobuy === uuddlrlrbas) {
+      alert("Konami Code entered. Redirecting to credits.");
       window.location.href = "questingcredits.html";
-  }
-} else {
+    }
+  } else {
     alert("We're Closed!");
-}
+  }
 }
 /* Hehe..  Secret Coder Candy!
 What is questing?
