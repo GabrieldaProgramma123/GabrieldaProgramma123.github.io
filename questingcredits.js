@@ -28,6 +28,7 @@ const credits = [
   "My Father",
   "Lienna Daniel Kogler",
   "Akintunde Pounds",
+  "Akintunde Pounds's Children",
   "Bacon",
   "Anne Parkinson",
   "Javascript",
@@ -37,6 +38,7 @@ const credits = [
   "Google Chrome",
   "Animal Crossing",
   "Life",
+  "Fun",
   "GARY!!",
   "Questing",
   "Thomas Gabriel",
@@ -52,12 +54,13 @@ const credits = [
   "If Verizon switched their switching, would the switching make Verizon unswitchable?",
   "Up, Up, Down, Down, Left, Right, Left, Right, B, A, Start.",
   "Questing Online is owned by Gabriel Bayker.",
-  "You may be wondering, hoow do we get back?",
+  "You may be wondering, how do we get back?",
   "Well, I've developed a way to make infinitely long credits."
 ];
 const onCredits = [];
 let credNum = 0;
 let scrolled = 500;
+var score = 0;
 function start() {
   makeCredits();
   setInterval(makeCredits, 3000);
@@ -70,16 +73,20 @@ function makeCredits() {
   credNum++;
 }
 function Credit() {
-  this.form = document.createElement("p");
+  this.form = document.createElement("button");
   if (credNum < credits.length) {
     this.form.innerHTML = credits[credNum];
+    this.form.setAttribute("onclick", "scored()");
   } else {
-    this.form.innerHTML = "<a href='questing.html'>BACK</a>";
+    this.form.innerHTML = `<a href='questing.html'>BACK</a> <p>your score was ${score}</p>`;
   }
   this.form.style.position = "absolute";
   this.form.style.top = "500px";
   this.form.style.color = "black";
   this.ypos = 500;
+}
+function scored() {
+  score++;
 }
 function roll() {
   for (var i = 0; i < onCredits.length; i++) {

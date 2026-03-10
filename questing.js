@@ -477,7 +477,10 @@ function animate() {
     document.getElementById("points").innerHTML = `Points: ${moneyPoins}`;
   }
   if (isAt(7441, 7459)) {
-    sleep("bed");
+    let dayis = prompt("How many days would you like to sleep?");
+    for (let i = 0; i < +dayis; i++) {
+      sleep("bed");
+    }
   }
   document.getElementById("money").innerHTML = `Coins: ${money} <br> XP: ${xp}`;
   document.getElementById("healthy").innerHTML = `Health: ${health}`;
