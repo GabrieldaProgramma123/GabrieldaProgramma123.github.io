@@ -1,6 +1,7 @@
 var xpos = 150;
 var ypos = 24;
-var canmove;
+var canmove = true;
+// smooth scrolling variable
 var onSurface = true;
 var whattobuy;
 var equippedWeapon;
@@ -401,12 +402,12 @@ item 7 is not a weapon, so it has a damage of "NA"
 */
 
 function start() {
-  // document.getElementById("bagkGround").play();
+  goHome();
 }
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+document.addEventListener("load", start());
 function isAt(xcor, ycor) {
   return xpos === xcor && ypos === ycor;
 }
@@ -478,15 +479,26 @@ function animate() {
   }
   if (isAt(7441, 7459)) {
     let dayis = prompt("How many days would you like to sleep?");
+    if (+dayis > 0) {
     for (let i = 0; i < +dayis; i++) {
       sleep("bed");
     }
+  } else {
+    alert("Not tired today, eh?");
+    goToHome();
+  }
   }
   document.getElementById("money").innerHTML = `Coins: ${money} <br> XP: ${xp}`;
   document.getElementById("healthy").innerHTML = `Health: ${health}`;
-  document
-    .getElementById("main")
-    .scrollIntoView({ behavior: "smooth", block: "center", inline: `center` });
+  document.getElementById("scrolli").innerHTML =
+    `Smooth Scrolling:<br> ${canmove}`;
+  if (canmove) {
+    document.getElementById("main").scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "center",
+    });
+  }
   if (health <= 0) {
     gameOver();
   }
@@ -512,7 +524,7 @@ function pause() {
   menu.style.left = "200px";
   menu.style.top = "5px";
   menu.innerHTML =
-    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
+    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!<br>Controls: <br>Arrows: Move<br><br>Shift + arrows:<br>Scroll<br><br>Shift + S: Activate Smooth Scrolling<br>Shift + M: Play Music<br>Shift + P: Pause Music<br>I or Click: Interact";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
@@ -1111,6 +1123,7 @@ function goToCave() {
 function goToHome() {
   xpos = 7027;
   ypos = 7027;
+  scrollTo(7027, 7027);
   leftBound = 7000;
   rightBound = 7500;
   upBound = 7000;
@@ -1255,6 +1268,59 @@ function vacation() {
     }
   }
 }
+document.addEventListener("keydown", function (event) {
+  if (event.shiftKey) {
+    if (event.code === "ArrowRight") {
+      scrollBy(18, 0);
+      event.preventDefault();
+    }
+    if (event.code === "ArrowLeft") {
+      scrollBy(-18, 0);
+      event.preventDefault();
+    }
+    if (event.code === "ArrowUp") {
+      scrollBy(0, -18);
+      event.preventDefault();
+    }
+    if (event.code === "ArrowDown") {
+      scrollBy(0, 18);
+      event.preventDefault();
+    }
+    if (event.code === "KeyS") {
+      canmove = !canmove;
+    }
+    if (event.code === "KeyM") {
+      document.getElementById("bagkGround").play();
+    }
+    if (event.code === "KeyP") {
+      document.getElementById("bagkGround").pause();
+    }
+  } else {
+    if (event.code === "ArrowRight") {
+      moveRight();
+      event.preventDefault();
+    }
+    if (event.code === "ArrowLeft") {
+      moveLeft();
+      event.preventDefault();
+    }
+    if (event.code === "ArrowUp") {
+      moveUp();
+      event.preventDefault();
+    }
+    if (event.code === "ArrowDown") {
+      moveDown();
+      event.preventDefault();
+    }
+    if (event.code === "KeyI") {
+      interact();
+      event.preventDefault();
+    }
+  }
+});
+document.addEventListener("click", function(event) {
+  interact();
+})
 function tickle() {
   if (anger === 0) {
     window.alert("That Tickles!");

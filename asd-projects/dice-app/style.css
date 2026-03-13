@@ -1,6 +1,7 @@
-#die {
+#dieID {
   height: 100px;
   width: 100px;
+  border: 5px solid black;
   background-color: lightgray; /* Feel free to customize */
   position: relative;
 }

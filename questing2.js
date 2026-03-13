@@ -195,9 +195,13 @@ function animate() {
   }
   document.getElementById("money").innerHTML = `Coins: ${money} <br> XP: ${xp}`;
   document.getElementById("healthy").innerHTML = `Health: ${health}`;
-  document
-    .getElementById("main")
-    .scrollIntoView({ behavior: "smooth", block: "center", inline: `center` });
+  if (canmove) {
+    document.getElementById("main").scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "center",
+    });
+  }
   if (health <= 0) {
     gameOver();
   }
@@ -223,7 +227,7 @@ function pause() {
   menu.style.left = "200px";
   menu.style.top = "5px";
   menu.innerHTML =
-    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!";
+    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!<br>Controls: <br>Arrows: Move<br><br>Shift + arrows:<br>Scroll<br><br>Shift + S: Activate Smooth Scrolling<br>I: Interact";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
@@ -695,6 +699,56 @@ function vacation() {
     window.location.href = "questing.html";
   }
 }
+document.addEventListener("keydown", function (event) {
+  if (event.shiftKey) {
+    if (event.code === "ArrowRight") {
+      scrollBy(18, 0);
+      event.preventDefault();
+    }
+    if (event.code === "ArrowLeft") {
+      scrollBy(-18, 0);
+      event.preventDefault();
+    }
+    if (event.code === "ArrowUp") {
+      scrollBy(0, -18);
+      event.preventDefault();
+    }
+    if (event.code === "ArrowDown") {
+      scrollBy(0, 18);
+      event.preventDefault();
+    }
+    if (event.code === "KeyS") {
+      canmove = !canmove;
+    }
+    if (event.code === "KeyM") {
+      document.getElementById("bagkGround").play();
+    }
+    if (event.code === "KeyP") {
+      document.getElementById("bagkGround").pause();
+    }
+  } else {
+    if (event.code === "ArrowRight") {
+      moveRight();
+      event.preventDefault();
+    }
+    if (event.code === "ArrowLeft") {
+      moveLeft();
+      event.preventDefault();
+    }
+    if (event.code === "ArrowUp") {
+      moveUp();
+      event.preventDefault();
+    }
+    if (event.code === "ArrowDown") {
+      moveDown();
+      event.preventDefault();
+    }
+    if (event.code === "KeyI") {
+      interact();
+      event.preventDefault();
+    }
+  }
+});
 function tickle() {
   if (anger === 0) {
     window.alert("That Tickles!");
