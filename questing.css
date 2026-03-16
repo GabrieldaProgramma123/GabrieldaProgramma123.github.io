@@ -14,6 +14,12 @@ body {
   color: white;
   border-color: white;
   z-index: 2;
+} .items3 {
+  position: absolute;
+  background-color: red;
+  color: white;
+  border-color: white;
+  z-index: 2;
 } .items2 {
   position: absolute;
   background-color: red;
