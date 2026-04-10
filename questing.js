@@ -45,8 +45,6 @@ var outerTime = 0;
 var innerTimeString;
 var hours = 8;
 var pm = false;
-// isTimeSwitched was used previously to prevent multiple toggles at 12, but the
-// clock logic below has been simplified so the extra state is no longer needed.
 var isEnemyMade = false;
 var isDay = true;
 var days = 0;
@@ -401,13 +399,10 @@ weapons 1 - 5 are basic
 item 7 is not a weapon, so it has a damage of "NA"
 */
 
-function start() {
-  goHome();
-}
+
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-document.addEventListener("load", start());
 function isAt(xcor, ycor) {
   return xpos === xcor && ypos === ycor;
 }
@@ -505,6 +500,7 @@ function animate() {
   // GARY
 }
 function pause() {
+  if (!isPaused) {
   isPaused = true;
   document.getElementById("dayNight").style.backgroundColor =
     "rgba(0, 0, 0, 0.50)";
@@ -524,11 +520,11 @@ function pause() {
   menu.style.left = "200px";
   menu.style.top = "5px";
   menu.innerHTML =
-    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!<br>Controls: <br>Arrows: Move<br><br>Shift + arrows:<br>Scroll<br><br>Shift + S: Activate Smooth Scrolling<br>Shift + M: Play Music<br>Shift + P: Pause Music<br>I or Click: Interact";
+    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!<br>Controls: <br>Arrows: Move<br><br>Shift + arrows:<br>Scroll<br><br>Shift + S: Activate Smooth Scrolling<br>Shift + M: Play Music<br>Shift + P: Pause Music<br>Shift + B: Pause<br>I or Click: Interact";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
-  unpaused.setAttribute("onclick", "unpause()");
+  unpaused.setAttribute("onclick", "pause()");
   unpaused.innerHTML = "unpause";
   unpaused.style.position = "absolute";
   unpaused.style.left = "330px";
@@ -548,8 +544,7 @@ function pause() {
   loadpush.style.top = "50px";
   loadpush.setAttribute("onclick", "loadSave()");
   loadpush.innerHTML = "LOAD";
-}
-function unpause() {
+  } else if (isPaused) {
   isPaused = false;
   document.body.removeChild(document.getElementById("lilMenu"));
   document.body.removeChild(document.getElementById("stopstop"));
@@ -561,6 +556,10 @@ function unpause() {
   } else {
     document.getElementById("dayNight").style.backgroundColor = "#00006480";
   }
+}
+}
+function unpause() {
+  
 }
 function clock() {
   if (!isPaused) {
@@ -1294,6 +1293,9 @@ document.addEventListener("keydown", function (event) {
     }
     if (event.code === "KeyP") {
       document.getElementById("bagkGround").pause();
+    }
+    if (event.code === "KeyB") {
+      pause();
     }
   } else {
     if (event.code === "ArrowRight") {
