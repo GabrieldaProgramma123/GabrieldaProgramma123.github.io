@@ -453,6 +453,13 @@ function animate() {
       */
   }
   // create enemies
+  for (let i = 0; i < kids.length; i++) {
+        kids[i].xpos = xpos;
+        kids[i].ypos = ypos;
+        document.getElementById(`KU-${i}`).style.left = `${kids[i].xpos}px`;
+        document.getElementById(`KU-${i}`).style.top =
+          `${kids[i].ypos - 6 * i}px`;
+      }
   // babysitting loop
 
   // check if interacting
@@ -520,7 +527,7 @@ function pause() {
   menu.style.left = "200px";
   menu.style.top = "5px";
   menu.innerHTML =
-    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!<br>Controls: <br>Arrows: Move<br><br>Shift + arrows:<br>Scroll<br><br>Shift + S: Activate Smooth Scrolling<br>Shift + M: Play Music<br>Shift + P: Pause Music<br>Shift + B: Pause<br>I or Click: Interact";
+    "Child:<br> 20 coins<br>and Lose all<br>InvFriends<br>(at least 3)<br>Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!<br>Controls: <br>Arrows: Move<br><br>Shift + arrows:<br>Scroll<br><br>Shift + S: Activate Smooth Scrolling<br>Shift + M: Play Music<br>Shift + P: Pause Music<br>Shift + B: Pause<br>I or Click: Interact";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
@@ -626,9 +633,11 @@ function clock() {
         if (isAt(7423, 7189)) {
           if (kids.length !== 0) {
             kids[i].processEating();
-            alert("Your kids have eaten");
+            alert("Your kids have eaten.");
+            moveDown();
           } else {
-            alert("There is no one to feed");
+            alert("There is no one to feed.");
+            moveDown();
           }
         }
         kids[i].xpos = xpos;
@@ -637,7 +646,7 @@ function clock() {
         document.getElementById(`KU-${i}`).style.top =
           `${kids[i].ypos - 6 * i}px`;
       }
-      if ((kids[i].dead = true)) {
+      if ((kids[i].dead === true)) {
         kids.splice(i, 1);
       }
     }
@@ -727,7 +736,7 @@ let updater = setInterval(animate, 20);
 let updaterTime = setInterval(clock, 700);
 
 function birth() {
-  alert("You're having a baby!");
+  alert("You're adopting a baby!");
   xxyy = getRndInteger(1, 2);
   if (xxyy === 2) {
     childGender = "boy";
@@ -1157,7 +1166,7 @@ function openInv() {
 function shopMenu() {
   if (isDay) {
     whattobuy = prompt(
-      `Stuff Available: Car, Health Potion, Damage Upgrade, InvFriend Removal and These Items: ${forsale}. We also have a free copy of Questing Online's Credits.`,
+      `Stuff Available: Child, Car, Health Potion, Damage Upgrade, InvFriend Removal and These Items: ${forsale}. We also have a free copy of Questing Online's Credits.`,
     );
     for (let i = 0; i < forsale.length; i++) {
       if (whattobuy === forsale[i]) {
@@ -1195,6 +1204,19 @@ function shopMenu() {
         money -= 500;
       } else {
         alert("Not Enough Money");
+      }
+    }
+    if (whattobuy === "Child") {
+      if (money >= 20) {
+        if (friendsInv.length >= 3) {
+          money -= 20;
+          friendsInv.length = 0;
+          birth();
+        } else {
+          alert("Not enough InvFriends to lose")
+        }
+      } else {
+        alert("Not Enough Money!")
       }
     }
     if (whattobuy === "InvFriend Removal") {
