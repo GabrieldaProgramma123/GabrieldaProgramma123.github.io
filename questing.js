@@ -971,6 +971,7 @@ function saveProgress() {
   save.kidstring = kidstring;
   save.foestring = foestring;
   save.foeval = 0;
+  save.kids = kids;
   save.kidval = kidval;
   save.car = car;
   save.forsaleVal = forsaleVal;
