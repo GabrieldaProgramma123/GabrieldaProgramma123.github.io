@@ -208,17 +208,16 @@ function animate() {
   // GARY
 }
 function pause() {
+  if (!isPaused) {
   isPaused = true;
   document.getElementById("dayNight").style.backgroundColor =
     "rgba(0, 0, 0, 0.50)";
   const menu = document.createElement("div");
   const unpaused = document.createElement("button");
-  const savepush = document.createElement("button");
-  const loadpush = document.createElement("button");
   menu.id = "lilMenu";
   unpaused.id = "stopstop";
   document.body.append(menu);
-  menu.style.position = "fixed";
+  menu.style.position = "absolute";
   menu.style.backgroundColor = "red";
   menu.style.color = "white";
   menu.style.borderColor = "white";
@@ -227,29 +226,28 @@ function pause() {
   menu.style.left = "200px";
   menu.style.top = "5px";
   menu.innerHTML =
-    "Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!<br>Controls: <br>Arrows: Move<br><br>Shift + arrows:<br>Scroll<br><br>Shift + S: Activate Smooth Scrolling<br>I: Interact";
+    "Child:<br> 20 coins<br>and Lose all<br>InvFriends<br>(at least 3)<br>Car:<br> 500 coins<br>Health Potion:<br> 20 coins<br>Damage Upgrade:<br> 20 coins<br>InvFriend<br>Removal:30 coins<br>if you've beaten<br>the game<br><br>Rusty Blade:<br> 1 dmg, 25 coins<br>0ld Sword:<br> 1.5 dmg, 50 coins<br>Axe:<br> 2 dmg, 70 coins<br>Nice Axe:<br> 4 dmg, 90 coins<br>Shiny Sword:<br> 6 dmg: 120 coins<br>Worst Sword Ever:<br> 0.01 dmg, free!<br>Controls: <br>Arrows: Move<br><br>Shift + arrows:<br>Scroll<br><br>Shift + S: Activate Smooth Scrolling<br>Shift + M: Play Music<br>Shift + P: Pause Music<br>Shift + B: Pause<br>I or Click: Interact";
   document.body.append(unpaused);
   unpaused.style.backgroundColor = "red";
   unpaused.style.color = "white";
-  unpaused.setAttribute("onclick", "unpause()");
+  unpaused.setAttribute("onclick", "pause()");
   unpaused.innerHTML = "unpause";
-  unpaused.style.position = "fixed";
+  unpaused.style.position = "absolute";
   unpaused.style.left = "330px";
   unpaused.style.top = "5px";
   unpaused.style.zIndex = "2";
-}
-function unpause() {
+
+  } else if (isPaused) {
   isPaused = false;
   document.body.removeChild(document.getElementById("lilMenu"));
   document.body.removeChild(document.getElementById("stopstop"));
-  document.body.removeChild(document.getElementById("savid"));
-  document.body.removeChild(document.getElementById("loadid"));
   if (isDay) {
     document.getElementById("dayNight").style.backgroundColor =
       "rgba(0, 0, 0, 0)";
   } else {
     document.getElementById("dayNight").style.backgroundColor = "#00006480";
   }
+}
 }
 function clock() {
   if (!isPaused) {

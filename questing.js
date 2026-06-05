@@ -115,6 +115,49 @@ const invFriends = [
   "Eliza",
   "Elizabeth",
   "Laurie",
+  // normal names again
+  "Sydnee",
+  "Sidney",
+  "Sydnei",
+  "Bailey",
+  "Beighleigh",
+  "Beighley",
+  "Beighblade",
+  "Beighbleighde",
+  "Beyleigh",
+  "Baileigh",
+  "Inshtagramme",
+  "Youghtuwbbè",
+  "Natalie",
+  "Nataleigh",
+  "Natyleigh",
+  "Nadylie",
+  "Natylie",
+  "Naddaleigh",
+  "Nadaleigh",
+  "Wifey",
+  "Amanda",
+  "Niceleigh",
+  "Dunn",
+  "Andrea",
+  "Golden",
+  "Goldie",
+  "Arty",
+  "Bow",
+  "Kim",
+  "Kimme",
+  "Rabecca",
+  "Ryan",
+  "Ryandom",
+  "Deighseigh",
+  "Deighzeigh",
+  "Lily",
+  "Alyzabeth",
+  "John",
+  "Kitty",
+  "Rawrie",
+];
+const invKatie = [
   // CAITLIN = C SPELLINGS
 
   "Caitlin",
@@ -275,47 +318,6 @@ const invFriends = [
   // WILD
   "KVIIIlyn",
   "Q8VIIILyn",
-  // normal names again
-  "Sydnee",
-  "Sidney",
-  "Sydnei",
-  "Bailey",
-  "Beighleigh",
-  "Beighley",
-  "Beighblade",
-  "Beighbleighde",
-  "Beyleigh",
-  "Baileigh",
-  "Inshtagramme",
-  "Youghtuwbbè",
-  "Natalie",
-  "Nataleigh",
-  "Natyleigh",
-  "Nadylie",
-  "Natylie",
-  "Naddaleigh",
-  "Nadaleigh",
-  "Wifey",
-  "Amanda",
-  "Niceleigh",
-  "Dunn",
-  "Andrea",
-  "Golden",
-  "Goldie",
-  "Arty",
-  "Bow",
-  "Kim",
-  "Kimme",
-  "Rabecca",
-  "Ryan",
-  "Ryandom",
-  "Deighseigh",
-  "Deighzeigh",
-  "Lily",
-  "Alyzabeth",
-  "John",
-  "Kitty",
-  "Rawrie",
 ];
 const baddies = [];
 const save = {
@@ -1274,7 +1276,12 @@ function vacation() {
           "Now Saving. When you return, check your inventory for something sweet.",
         );
         money -= 25;
-        friendsInv.push(invFriends[getRndInteger(0, invFriends.length - 1)]);
+        var isitkate = getRndInteger(1, 2);
+        if (isitkate === 1) {
+          friendsInv.push(invFriends[getRndInteger(0, invFriends.length - 1)]);
+        } else if (isitkate === 2) {
+          friendsInv.push(invKatie[getRndInteger(0, invFriends.length - 1)]);
+        }
         saveProgress();
         window.location.href = "questing2.html";
       } else {
