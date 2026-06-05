@@ -601,7 +601,7 @@ function clock() {
       createEnemies(
         getRndInteger(150, 500),
         getRndInteger(500, 1000),
-        getRndInteger(5, foeStrength),
+        getRndInteger(5, Math.floor(foeStrength)),
         10,
       );
     }
@@ -932,6 +932,7 @@ function Enemy(xps, yps, hlth, baseDmg) {
     this.dead = true;
     money += Math.ceil(hlth / 2);
     xp += Math.ceil(hlth / 2);
+    foeStrength += (hlth / 50);
   };
 }
 // constructors end
