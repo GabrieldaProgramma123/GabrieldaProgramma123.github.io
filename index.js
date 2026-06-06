@@ -5,7 +5,6 @@ function furstSupply() {
     if (x === 0) {
         document.getElementById("supply1").innerHTML = "Knowledge";
         document.getElementById("supply1").className = "goals";
-        alert(hi);
     } else if (x === 1) {
         document.getElementById("supply1").innerHTML = "Paper";
         document.getElementById("supply1").className = "sheet";
@@ -25,7 +24,6 @@ function interests() {
     if (x === 0) {
         document.getElementById("supply").innerHTML = "Video Games";
         document.getElementById("supply").className = "goals";
-        alert(hi);
     } else if (x === 1) {
         document.getElementById("supply").innerHTML = "Coding";
         document.getElementById("supply").className = "sheet";
