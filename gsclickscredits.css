@@ -1,0 +1,8 @@
+body {
+  background-color: pink;
+  margin: 0px;
+} .credits {
+    text-align: center;
+    position: absolute;
+    width: 1000px
+}

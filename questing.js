@@ -454,7 +454,6 @@ function animate() {
     }
       */
   }
-  // create enemies
   for (let i = 0; i < kids.length; i++) {
         kids[i].xpos = xpos;
         kids[i].ypos = ypos;
@@ -859,7 +858,7 @@ function npc(name, xpos, ypos, dialogue, npcid) {
         );
         alert("Now Saving.");
         isBeaten = true;
-        saveProgress();
+        saveProgress("credits");
         window.location.href = "questingcredits.html";
       } else if (isBeaten) {
         alert("You've already escaped!");
@@ -936,7 +935,13 @@ function Enemy(xps, yps, hlth, baseDmg) {
   };
 }
 // constructors end
-function saveProgress() {
+function saveProgress(thing) {
+  if (thing === "credits") {
+    var savie = alert("This save had to happen.")
+  } else {
+    var savie = prompt("Are you sure you want to save?");
+  }
+  if (savie === "yes" || thing === "credits") {
   save.xpos = xpos;
   save.ypos = ypos;
   save.canmove = canmove;
@@ -1003,8 +1008,11 @@ function saveProgress() {
   save.isBeaten = isBeaten;
   save.friendsInv = friendsInv;
   localStorage.setItem("saves", JSON.stringify(save));
+  }
 }
 function loadSave() {
+  var savie = prompt("Are you sure you want to load?");
+  if (savie === "yes") {
   const load = JSON.parse(localStorage.getItem("saves"));
   if (!load) return;
 
@@ -1019,6 +1027,7 @@ function loadSave() {
   isPaused = true;
   document.getElementById("dayNight").style.backgroundColor =
     "rgba(0, 0, 0, 0.50)";
+}
 }
 function stopMovement() {
   stopped = !stopped;

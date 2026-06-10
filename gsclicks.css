@@ -1,0 +1,10 @@
+body {
+    background-color: pink;
+    margin: 0px;
+} .School {
+    background-color: aliceblue;
+    text-align: center;
+} .toschool {
+    color: palevioletred;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
