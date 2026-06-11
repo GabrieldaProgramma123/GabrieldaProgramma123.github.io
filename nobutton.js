@@ -12,28 +12,28 @@ const buttonView = document.createElement("button");
 const draw = document.createElement("button");
 const pmove = document.createElement("p");
 const inputMove = document.createElement("input");
-let startable = true;
-let superClick;
-let y = 0;
-let buttsSpanked = 0;
-let deadVal;
-let kval = false;
-let valueval;
-let valcap;
-let safe = true;
-let BossHealth = 30;
-let PlayerHealth = 50;
+var startable = true;
+var superClick;
+var y = 0;
+var buttsSpanked = 0;
+var deadVal;
+var kval = false;
+var valueval;
+var valcap;
+var safe = true;
+var BossHealth = 30;
+var PlayerHealth = 50;
 const equations = [];
-let AtkDes;
-let rndClick = 0;
-let wildNum;
-let handNum;
-let iDeal = true;
-let p1turn = true;
-let p1move;
-let p2move;
-let handValue;
-let drawNum = 0;
+var AtkDes;
+var rndClick = 0;
+var wildNum;
+var handNum;
+var iDeal = true;
+var p1turn = true;
+var p1move;
+var p2move;
+var handValue;
+var drawNum = 0;
 const wildCards = ["Wild Draw Four","Wild"];
 const colorCards = ["9","8","7","6","5","4","3","2","1","0"];
 const colors = ["Red","Blue","Green","Yellow"];
@@ -271,11 +271,12 @@ function viewP2Hand() {
   window.alert(p2hand);
 }
 function play() {
+  debugger;
   let x = 0;
   if(p1turn){
     //play the card
   p1move = document.getElementById("cardplayed1").value;
-    handValue = (p1hand[p1move - 1]);
+    handValue = (p1hand[p1move - 1].toString());
     //special card functions
       //colors
       if(document.getElementById("move").innerHTML.includes("Red")){
