@@ -19,6 +19,9 @@ function furstSupply() {
         document.getElementById("supply1").className = "joy";
     }
 }
+function queries() {
+    document.getElementById("askme").setAttribute("href", "mailto:gabrieltender1@gmail.com?subject=Request%20from%20website: " + document.getElementById("theQuery2").value +  "&body=" + document.getElementById("theQuery").value)
+}
 function interests() {
     x = Math.floor(Math.random() * 5);
     if (x === 0) {

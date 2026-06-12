@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta http-equiv="refresh" content="1000000">
+<meta name="description" content="Shopping Hub: Sell and Buy.">
+<meta name="keywords" content="Shopping Hub, Community Shop, Low Priced Items">
+<meta name="author" content="Gabriel">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<style>
+body{background-color :green; }
+h1{color: maroon ;}
+p{color: maroon; }
+button{background-color: maroon; }
+button{border-color: blue; }
+button{color: red; }
+input{background-color: coral; }
+
+
+
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+<title>PublicServSharShop</title>
+
+</head>
+<body>
+
+<p>Enter Item Name Here</p>
+
+<div ng-app="">
+
+<label for="iname">Item Name:</label>
+  <input type="text" ng-model="item" id="iname" name="iname"><br><br>
+  <input type="submit" value="Submit">
+
+<p ng-bind="item"></p>
+</div>
+
+<br>
+<br>
+<br>
+<p>Items posted go here!</p>
+<br><br>
+<a href="ServiceStore.html"<button>Back to Home</button></a>
+
