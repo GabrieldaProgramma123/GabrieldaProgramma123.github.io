@@ -130,3 +130,10 @@ it_go = 0;
     it_go = 0;
  }
  // Coder Candy 2 done
+
+ /* coder candy 3: previous bio
+ 
+ I am a 14 (now 16)
+year old boy who is learning to be a programmer, and I am decently good. If you want a website, just email me at gabrieltender1@ gmail.com.
+
+ */
