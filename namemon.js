@@ -21,8 +21,8 @@ function saveProgress(thing) {
   }
 }
 function loadSave() {
-  var savie = prompt("Are you sure you want to load?");
-  if (savie === "yes") {
+  var savie = confirm("Are you sure you want to load?");
+  if (savie) {
     const load = JSON.parse(localStorage.getItem("saves2"));
     if (!load) return;
 
