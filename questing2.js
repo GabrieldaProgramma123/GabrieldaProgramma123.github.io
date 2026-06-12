@@ -692,8 +692,8 @@ function sub() {
   // unused
 }
 function vacation() {
-  var askfly = prompt("Ready to return?");
-  if (askfly === "yes") {
+  var askfly = confirm("Ready to return?");
+  if (askfly) {
     window.location.href = "questing.html";
   }
 }

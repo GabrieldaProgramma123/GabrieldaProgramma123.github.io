@@ -11,11 +11,11 @@ function animate() {
 setInterval(animate, 30)
 function saveProgress(thing) {
   if (thing === "credits") {
-    var savie = alert("This save had to happen.")
+    var savie = true;
   } else {
-    var savie = prompt("Are you sure you want to save?");
+    var savie = confirm("Are you sure you want to save?");
   }
-  if (savie === "yes" || thing === "credits") {
+  if (savie|| thing === "credits") {
       save.namesCollected = namesCollected;
     localStorage.setItem("saves2", JSON.stringify(save));
   }

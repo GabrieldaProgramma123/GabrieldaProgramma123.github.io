@@ -16,11 +16,11 @@ function getRndInteger(min, max) {
 }
 function saveProgress(thing) {
   if (thing === "credits") {
-    var savie = alert("This save had to happen.")
+    var savie = true;
   } else {
-    var savie = prompt("Are you sure you want to save?");
+    var savie = confirm("Are you sure you want to save?");
   }
-  if (savie === "yes" || thing === "credits") {
+  if (savie|| thing === "credits") {
     save.currentGrade = currentGrade;
     save.clicks = clicks;
     save.gradLevel = gradLevel;
@@ -30,8 +30,8 @@ function saveProgress(thing) {
   }
 }
 function loadSave() {
-  var savie = prompt("Are you sure you want to load?");
-  if (savie === "yes") {
+  var savie = confirm("Are you sure you want to load?");
+  if (savie) {
     const load = JSON.parse(localStorage.getItem("saves2"));
     if (!load) return;
 

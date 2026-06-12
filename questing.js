@@ -937,11 +937,11 @@ function Enemy(xps, yps, hlth, baseDmg) {
 // constructors end
 function saveProgress(thing) {
   if (thing === "credits") {
-    var savie = alert("This save had to happen.")
+    var savie = true;
   } else {
-    var savie = prompt("Are you sure you want to save?");
+    var savie = confirm("Are you sure you want to save?");
   }
-  if (savie === "yes" || thing === "credits") {
+  if (savie || thing === "credits") {
   save.xpos = xpos;
   save.ypos = ypos;
   save.canmove = canmove;
@@ -1011,8 +1011,8 @@ function saveProgress(thing) {
   }
 }
 function loadSave() {
-  var savie = prompt("Are you sure you want to load?");
-  if (savie === "yes") {
+  var savie = confirm("Are you sure you want to load?");
+  if (savie) {
   const load = JSON.parse(localStorage.getItem("saves"));
   if (!load) return;
 
@@ -1278,8 +1278,8 @@ function sub() {
   // unused
 }
 function vacation() {
-  var askfly = prompt("Ready to fly? 25 coins per trip!");
-  if (askfly === "yes") {
+  var askfly = confirm("Ready to fly? 25 coins per trip!");
+  if (askfly) {
     if (money >= 25) {
       if (friendsInv.length <= 10) {
         alert(
